@@ -1,0 +1,49 @@
+{
+  "tasks": [
+    {
+      "type": "npm",
+      "script": "start",
+      "path": "backend/",
+      "problemMatcher": [],
+      "label": "npm: start - backend",
+      "detail": "nodemon --watch backend --exec node --experimental-modules src/server.js",
+      "group": "build"
+    },
+    {
+      "type": "npm",
+      "script": "debug:prod",
+      "path": "backend/",
+      "problemMatcher": [],
+      "label": "npm: debug:prod - backend",
+      "detail": "NODE_ENV=production --exec ndb --experimental-modules src/server.js",
+      "group": "build"
+    },
+    {
+      "type": "npm",
+      "script": "start:prod",
+      "path": "backend/",
+      "problemMatcher": [],
+      "label": "npm: start:prod - backend",
+      "detail": "NODE_ENV=production nodemon  --exec node --experimental-modules src/server.js",
+      "group": "build"
+    },
+    {
+      "type": "npm",
+      "script": "debug",
+      "path": "backend/",
+      "problemMatcher": [],
+      "label": "npm: debug - backend",
+      "detail": "nodemon  --exec ndb --experimental-modules src/server.js",
+      "group": "build"
+    },
+    {
+      "type": "npm",
+      "script": "start",
+      "path": "frontend/",
+      "problemMatcher": [],
+      "label": "npm: start - frontend",
+      "detail": "react-scripts start",
+      "group": "build"
+    }
+  ]
+}

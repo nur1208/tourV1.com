@@ -1,0 +1,87 @@
+
+@port = 5000
+@Host =  http://localhost
+@route = api/v1/tours
+
+###
+
+GET {{Host}}:5000/
+
+###
+
+GET {{Host}}:{{port}}/{{route}}?price[lt]=1000
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxMmU5MmNhYzNkNjUzMzU1OGUwODMwNyIsImlhdCI6MTYzMDQ0Mjk5MSwiZXhwIjoxNjM4MTMyNTkxfQ.gAUdS8s6WeZw5PFL2xTla0tHqjORvkttkVP3ohgl7NY
+###
+
+GET {{Host}}:{{port}}/{{route}}/5c88fa8cf4afda39709c295d
+
+
+###
+GET {{Host}}:{{port}}/{{route}}/top-5-cheap/somethign
+
+###
+
+GET {{Host}}:{{port}}/{{route}}/tour-stats
+  
+
+###
+ 
+GET {{Host}}:5000/{{route}}/monthly-plan/2021
+  
+
+###
+POST {{Host}}:5000/{{route}}
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVjOGExZDViMDE5MGIyMTQzNjBkYzA1NyIsImlhdCI6MTYzMDQ4NTIzNCwiZXhwIjoxNjM4MTc0ODM0fQ.RGpsM7P8dqBHXggGrjWyhQBAiVti0S4pjZr8nrVVeZE
+
+{
+    "name":"testing something2",
+    "price":400,
+    "duration": 4,
+    "maxGroupSize": 10,
+    "difficulty": "difficult",
+    "summary": "Exciting adventure in the snow with snowboarding and skiing",
+    "imageCover": "tour-3-cover.jpg"
+    
+}
+
+###
+
+GET {{Host}}:5000/{{route}}/6123d05b017d8509c8c2fc59
+
+
+###
+PATCH {{Host}}:5000/{{route}}/6123d05b017d8509c8c2fc59
+Content-Type: application/json
+
+{
+    "name":"update tour",
+    "price":4, 
+    "rating": 4.2
+}
+
+###
+
+DELETE {{Host}}:{{port}}/{{route}}/612e07c79d8d9601d81241b4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxMmI3ZDAyOWE3NGZlMzRhYzFkZTM5YyIsImlhdCI6MTYzMDQzOTYwMSwiZXhwIjoxNjM4MTI5MjAxfQ.V_iT1u38RAPxz3fPIQssNi3i_B5bYJVl0VWUrxgSh0o   
+
+###
+
+POST {{Host}}:{{port}}/{{route}}/612f3b805f8b653b98bd0bb2/reviews
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVjOGEyNGEwMmY4ZmI4MTRiNTZmYTE5MyIsImlhdCI6MTYzMDQ4NTQzNSwiZXhwIjoxNjM4MTc1MDM1fQ.XSwO0b-M0vHn7JJb6wARGJ1rMQ9-JrCL7UQ5qLP32Ik
+
+{
+    "rating":3,
+    "review":"okay"
+}
+
+###
+GET  {{Host}}:{{port}}/{{route}}/612f3b805f8b653b98bd0bb2/reviews
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVjOGEyNGEwMmY4ZmI4MTRiNTZmYTE5MyIsImlhdCI6MTYzMDQ4NTQzNSwiZXhwIjoxNjM4MTc1MDM1fQ.XSwO0b-M0vHn7JJb6wARGJ1rMQ9-JrCL7UQ5qLP32Ik
+### 
+GET {{Host}}:{{port}}/{{route}}/tours-within/100000/center/-80.185942,25.774772/unit/mi
+
+###
+
+GET {{Host}}:{{port}}/{{route}}/distances/-80.185942,25.774772/unit/mi

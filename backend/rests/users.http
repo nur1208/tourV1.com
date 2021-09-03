@@ -1,0 +1,54 @@
+@port = 5000
+@Host =  http://localhost
+@route = api/v1/users
+
+
+###
+
+GET {{Host}}:{{port}}/{{route}}?role=admin
+
+###
+
+GET {{Host}}:{{port}}/{{route}}/bob
+
+###
+
+
+DELETE {{Host}}:{{port}}/{{route}}/612d7a49eb142b3d64fbd584 
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxMmI3ZDAyOWE3NGZlMzRhYzFkZTM5YyIsImlhdCI6MTYzMDQ0MDkwNSwiZXhwIjoxNjM4MTMwNTA1fQ.qQ0yDOmmaAVOPPSSlwb7YOIn7N_VGJ-MfmpxKcjbmn8
+
+###
+
+PATCH {{Host}}:{{port}}/{{route}}/612e92cac3d6533558e08307 
+Content-Type: application/json
+
+{
+    "name":"nur"
+}
+
+###
+PATCH  {{Host}}:{{port}}/{{route}}/updateMe 
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxMmI3YzZiMDIxYjQ3MzRjY2IyNjE4YiIsImlhdCI6MTYzMDMyNjY5NCwiZXhwIjoxNjM4MDE2Mjk0fQ.DiCCc-nrkgaDRw526P_ySQkfuim5giqv-MvxepQgFzM
+
+{
+    "name":"john5",
+    "email":"john5@bob.com",
+    "role":"admin"
+}
+
+
+
+###
+
+DELETE {{Host}}:{{port}}/{{route}}/deleteMe 
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxMmI3ZDAyOWE3NGZlMzRhYzFkZTM5YyIsImlhdCI6MTYzMDQ0MDkwNSwiZXhwIjoxNjM4MTMwNTA1fQ.qQ0yDOmmaAVOPPSSlwb7YOIn7N_VGJ-MfmpxKcjbmn8
+
+
+###
+
+GET  {{Host}}:{{port}}/{{route}}/me 
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxMmU5MmNhYzNkNjUzMzU1OGUwODMwNyIsImlhdCI6MTYzMDQ2NjU2MiwiZXhwIjoxNjM4MTU2MTYyfQ.xlw4G4WNGYTgyhOEPt9qlurpBC27zSB2tAoYqPO1K2Q

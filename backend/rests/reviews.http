@@ -1,0 +1,38 @@
+@port = 5000
+@Host =  http://localhost
+
+@route = api/v1/reviews
+
+GET {{Host}}:{{port}}/{{route}}?rating=1
+ 
+###
+
+POST {{Host}}:{{port}}/{{route}}
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxMmQ3YTQ5ZWIxNDJiM2Q2NGZiZDU4NCIsImlhdCI6MTYzMDQxMDY1MiwiZXhwIjoxNjM4MTAwMjUyfQ.kENh8rr_uoFjoXIWoXZnVQNnZpyoWeE6ucuK8B7gUpc
+
+{
+    "tour":"612e07c79d8d9601d81241b4",
+    "user":"612d7a49eb142b3d64fbd584",
+    "rating":4.5,
+    "review":"it's a good tour"
+}
+
+###
+
+DELETE {{Host}}:{{port}}/{{route}}/612e17bc2897162440fe02a6
+
+###
+
+
+
+PATCH {{Host}}:{{port}}/{{route}}/612f55514c89fb13489226fb 
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVjOGEyNGEwMmY4ZmI4MTRiNTZmYTE5MyIsImlhdCI6MTYzMDQ4NTQzNSwiZXhwIjoxNjM4MTc1MDM1fQ.XSwO0b-M0vHn7JJb6wARGJ1rMQ9-JrCL7UQ5qLP32Ik
+
+{
+    "rating":2,
+    "review":"great tour"
+}
+
+

@@ -1,0 +1,59 @@
+@port = 5000
+@Host =  http://localhost
+@route = api/v1/users
+
+POST {{Host}}:{{port}}/{{route}}/signup
+Content-Type: application/json
+     
+{
+    "name":"nena",
+    "email":"nena@nena.com",
+    "password":"12345678",
+    "passwordConfirm":"12345678"
+} 
+
+###
+# "email":"admin@natours.io",
+
+POST {{Host}}:{{port}}/{{route}}/login
+Content-Type: application/json
+
+{
+    "email":"lisa@example.com",
+    "password":"test1234"
+} 
+
+###
+
+GET {{Host}}:{{port}}/{{route}}/
+
+###
+
+POST  {{Host}}:{{port}}/{{route}}/forgetPassword
+Content-Type: application/json
+
+{
+    "email":"bob@bob.com"
+} 
+
+###
+
+PATCH  {{Host}}:{{port}}/{{route}}/resetPassword/d9ab7e636653a2cc6c0a90ef68a62acf50db9bb74e2e64ba79dbf5127d0db9c8 
+Content-Type: application/json
+
+{
+    "password":"87654321",
+    "passwordConfirm":"87654321"
+}
+
+
+###
+
+PATCH  {{Host}}:{{port}}/{{route}}/updateMyPassword 
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxMmI3ZDAyOWE3NGZlMzRhYzFkZTM5YyIsImlhdCI6MTYzMDMyMzAyNiwiZXhwIjoxNjM4MDEyNjI2fQ.02IQQ0yJwYFjsOtvc653cO_dh_Dgu3GZohRdLliAfsA
+
+{
+    "password":"12345678",
+    "passwordConfirm":"12345678"
+}
