@@ -6,6 +6,7 @@ import {
 import { HeadingTertiary } from "../HeadingTertiary";
 import { Image } from "../Image";
 import { CardDetails } from "./CardDetails";
+import { CardFooter } from "./CardFooter";
 
 export const Card = () => {
   return (
@@ -15,6 +16,7 @@ export const Card = () => {
         <HeadingTertiary text="The Sea Explorer" />
       </CardHeader>
       <CardDetails />
+      <CardFooter />
     </CardWrapper>
   );
 };

@@ -1,6 +1,17 @@
 import React from "react";
-import { BtnContainer } from "../styledComps/buttonSC";
+import {
+  BtnContainer,
+  BtnContainerV2,
+} from "../styledComps/buttonSC";
 
-export const Button = () => {
-  return <BtnContainer id="BtnContainer">Sign up</BtnContainer>;
+export const Button = (props) => {
+  return props.isV2 ? (
+    <BtnContainerV2 id="BtnContainer" {...props}>
+      {props.text || "Sign up"}
+    </BtnContainerV2>
+  ) : (
+    <BtnContainer id="BtnContainer" {...props}>
+      {props.text || "Sign up"}
+    </BtnContainer>
+  );
 };
