@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 export const NavContainer = styled.nav`
@@ -43,7 +44,7 @@ export const NavContainer = styled.nav`
   }
 `;
 
-export const NavEl = styled.a`
+export const NavEl = styled(Link)`
   &,
   :link,
   :visited {

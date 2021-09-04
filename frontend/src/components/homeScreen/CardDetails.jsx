@@ -1,11 +1,28 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { CardDetailsWrapper } from "../../styledComps/homeScreen/cardDetailsSc";
+import { getMonthAndYear } from "../../utils/getMonthAndYear";
 import { IconWithText } from "../IconWithText";
 
-export const CardDetails = () => {
+export const CardDetails = ({
+  description,
+  startDate,
+  stops,
+  maxGroupSize,
+}) => {
+  useEffect(() => {
+    if (startDate) {
+      const monthAndYear = getMonthAndYear(startDate);
+      console.log(typeof date);
+      console.log({
+        description,
+        startDate: monthAndYear,
+      });
+    }
+  }, [description, startDate]);
+
   const IconWithTexts = [
     {
-      text: " Miami, USA",
+      text: description,
       Icon: (
         <svg id="icon-map-pin" viewBox="0 0 24 24">
           <title>map-pin</title>
@@ -15,7 +32,7 @@ export const CardDetails = () => {
       ),
     },
     {
-      text: " June 2021",
+      text: getMonthAndYear(startDate),
       Icon: (
         <svg id="icon-calendar" viewBox="0 0 24 24">
           <title>calendar</title>
@@ -25,7 +42,7 @@ export const CardDetails = () => {
     },
 
     {
-      text: "4 stops",
+      text: `${stops} stops`,
       Icon: (
         <svg id="icon-flag" viewBox="0 0 24 24">
           <title>flag</title>
@@ -34,7 +51,7 @@ export const CardDetails = () => {
       ),
     },
     {
-      text: "15 people",
+      text: `${maxGroupSize} people`,
       Icon: (
         <svg id="icon-user" viewBox="0 0 24 24">
           <title>user</title>
@@ -51,8 +68,10 @@ export const CardDetails = () => {
         Exploring the jaw-dropping US east coast by foot and by
         boat
       </p>
-      {IconWithTexts.map(({ text, Icon }) => (
-        <IconWithText text={text}>{Icon}</IconWithText>
+      {IconWithTexts.map(({ text, Icon }, index) => (
+        <IconWithText text={text} key={index}>
+          {Icon}
+        </IconWithText>
       ))}
     </CardDetailsWrapper>
   );

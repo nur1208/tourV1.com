@@ -8,15 +8,39 @@ import { Image } from "../Image";
 import { CardDetails } from "./CardDetails";
 import { CardFooter } from "./CardFooter";
 
-export const Card = () => {
+export const Card = ({
+  name,
+  imageCover,
+  startLocation,
+  startDates,
+  locations,
+  maxGroupSize,
+  price,
+  ratingsAverage,
+  ratingsQuantity,
+  slug,
+}) => {
+  const imageProps = { name, imageCover };
+  const cardDetailsProps = {
+    description: startLocation.description,
+    startDate: startDates[0],
+    stops: locations.length,
+    maxGroupSize,
+  };
+  const cardFooterProps = {
+    price,
+    ratingsAverage,
+    ratingsQuantity,
+    slug,
+  };
   return (
     <CardWrapper id="CardWrapper">
       <CardHeader id="CardHeader">
-        <Image />
-        <HeadingTertiary text="The Sea Explorer" />
+        <Image {...imageProps} />
+        <HeadingTertiary text={name} />
       </CardHeader>
-      <CardDetails />
-      <CardFooter />
+      <CardDetails {...cardDetailsProps} />
+      <CardFooter {...cardFooterProps} />
     </CardWrapper>
   );
 };

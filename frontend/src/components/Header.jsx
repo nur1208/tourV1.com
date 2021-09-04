@@ -6,7 +6,7 @@ export const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navTourProps = {
     isTours: true,
-    navItems: [{ title: "All tours" }],
+    navItems: [{ title: "All tours", href: "/" }],
   };
   const navUserProps = {
     isUser: true,

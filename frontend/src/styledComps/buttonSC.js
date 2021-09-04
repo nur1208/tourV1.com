@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { NavEl } from "./header/navSc";
 
@@ -36,7 +37,7 @@ export const BtnContainer = styled(NavEl)`
   }
 `;
 
-export const BtnContainerV2 = styled.a`
+export const BtnContainerV2 = styled(Link)`
   font-size: 1.6rem;
   padding: 1.4rem 3rem;
   border-radius: 10rem;

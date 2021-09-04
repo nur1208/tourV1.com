@@ -5,14 +5,6 @@ export const TertiaryWrapper = styled.h3`
   text-transform: uppercase;
   font-weight: 300;
 
-  font-size: 2.75rem;
-  text-align: right;
-  position: absolute;
-  bottom: 1rem;
-  right: 2rem;
-  width: 70%;
-  z-index: 10;
-
   span {
     padding: 1rem 1.5rem;
     line-height: 1;
@@ -31,4 +23,24 @@ export const TertiaryWrapper = styled.h3`
       rgba(40, 180, 135, 0.85)
     );
   }
+
+  ${({ isPrimary }) =>
+    isPrimary
+      ? `
+    font-size: 4.5rem;
+    text-align: center;
+    width: 70%;
+    margin: 0 auto;
+ `
+      : `
+  
+    font-size: 2.75rem;
+    text-align: right;
+    position: absolute;
+    bottom: 1rem;
+    right: 2rem;
+    width: 70%;
+    z-index: 10;
+
+ `}
 `;

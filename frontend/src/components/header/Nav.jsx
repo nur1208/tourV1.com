@@ -11,9 +11,9 @@ export const Nav = ({ isTours, isUser, navItems }) => {
   return (
     <NavContainer id="NavContainer" {...navContainerProps}>
       {navItems &&
-        navItems.map(({ title, options }) =>
+        navItems.map(({ title, options, href }) =>
           !options ? (
-            <NavEl>{title}</NavEl>
+            <NavEl to={href}>{title}</NavEl>
           ) : (
             <NavEl>
               {options.isLoggedIn ? (

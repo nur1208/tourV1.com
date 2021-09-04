@@ -1,9 +1,28 @@
 import React from "react";
-import { Container } from "../styledComps/iconWithTextSC";
+import {
+  Container,
+  Label,
+  Text,
+} from "../styledComps/iconWithTextSC";
+import { TwoTexts } from "./tourDetails/TwoTexts";
 
-export const IconWithText = ({ children, text }) => {
+export const IconWithText = ({
+  children,
+  text,
+  isBig,
+  isIconWhite,
+  secondText,
+  hasMB,
+  isMRMore,
+}) => {
+  const containerProps = { isBig, hasMB, isMRMore };
+  const twoTextsProps = {
+    first: text,
+    second: secondText,
+    hasSecond: secondText,
+  };
   return (
-    <Container id="Container">
+    <Container id="Container" {...containerProps}>
       {/* <Icon style={{ height: 2, width: 2, fill: "#55c57a" }} /> */}
       {/* <svg
         id="icon-map-pin"
@@ -16,9 +35,17 @@ export const IconWithText = ({ children, text }) => {
       </svg> */}
 
       {React.cloneElement(children, {
-        style: { height: "2rem", width: "2rem", fill: "#55c57a" },
+        style: isIconWhite
+          ? {
+              height: "2rem",
+              width: " 2rem",
+              fill: "currentColor",
+              filter:
+                "drop-shadow(0 0.75rem 0.5rem rgba(0, 0, 0, 0.25))",
+            }
+          : { height: "2rem", width: "2rem", fill: "#55c57a" },
       })}
-      <span>{text}</span>
+      <TwoTexts {...twoTextsProps} />
     </Container>
   );
 };

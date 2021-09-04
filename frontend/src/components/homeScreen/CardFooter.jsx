@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import {
   Container,
   Ratings,
@@ -7,25 +8,30 @@ import {
 } from "../../styledComps/homeScreen/cardFooterSC";
 import { Button } from "../Button";
 
-export const CardFooter = () => {
+export const CardFooter = ({
+  price,
+  ratingsAverage,
+  ratingsQuantity,
+  slug,
+}) => {
   const ButtonProps = {
     isGreen: true,
     isSmall: true,
     text: "Details",
     isV2: true,
+    to: `/${slug}`,
   };
   return (
     <Container>
       <p>
-        <Value>$497</Value>
+        <Value>${price}</Value>
         <Text> per person</Text>
       </p>
 
       <Ratings>
-        <Value>4.8</Value>
-        <Text> rating (6)</Text>
+        <Value>{ratingsAverage}</Value>
+        <Text> rating ({ratingsQuantity})</Text>
       </Ratings>
-
       <Button {...ButtonProps} />
     </Container>
   );
