@@ -12,17 +12,35 @@ const overviewBoxGroupProps2 = { title: "Your tour guides" };
 const overviewBoxGroupProps3 = {
   title: "About The Sea Explorer tour",
 };
-export const Description = () => {
+export const Description = ({
+  startAt,
+  difficulty,
+  maxGroupSize,
+  ratingsAverage,
+  ratingsQuantity,
+  guides,
+}) => {
+  const iconWithTextsProps = {
+    startAt,
+    difficulty,
+    maxGroupSize,
+    ratingsAverage,
+    ratingsQuantity,
+  };
+
+  const yourGuidesProps = {
+    guides,
+  };
   return (
     <DescriptionW id="DescriptionW">
       <OverviewBox id="OverviewBox">
         <div>
           <OverviewBoxGroup {...overviewBoxGroupProps1}>
-            <IconWithTexts />
+            <IconWithTexts {...iconWithTextsProps} />
           </OverviewBoxGroup>
           <OverviewBoxGroup {...overviewBoxGroupProps2}>
             {/* <IconWithTexts /> */}
-            <YourGuides />
+            <YourGuides {...yourGuidesProps} />
           </OverviewBoxGroup>
         </div>
       </OverviewBox>

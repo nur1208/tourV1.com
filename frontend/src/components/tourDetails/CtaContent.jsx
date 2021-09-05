@@ -11,6 +11,7 @@ export const CtaContent = () => {
     isV2: true,
     isGreen: true,
     text: "Log in to book tour",
+    to: "/login",
   };
   return (
     <CtaContentW id="CtaContentW">

@@ -15,12 +15,12 @@ import {
 // you must set mergeParams to true
 const reviewRouter = express.Router({ mergeParams: true });
 
-reviewRouter.use(protect);
-
 reviewRouter
   .route("/")
   .get(getAllReviews)
-  .post(restrictTo("user"), setTourUserIds, createReview);
+  .post(protect, restrictTo("user"), setTourUserIds, createReview);
+
+reviewRouter.use(protect);
 
 reviewRouter
   .route("/:id")

@@ -6,7 +6,11 @@ import {
 
 export const Button = (props) => {
   return props.isV2 ? (
-    <BtnContainerV2 to={props.to} id="BtnContainer" {...props}>
+    <BtnContainerV2
+      to={props.to ? props.to : false}
+      id="BtnContainer"
+      {...props}
+    >
       {props.text || "Sign up"}
     </BtnContainerV2>
   ) : (

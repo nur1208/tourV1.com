@@ -4,15 +4,15 @@ import { HeadingBoxW } from "../../styledComps/tourDetails/headingBoxSc";
 import { HeadingTertiary } from "../HeadingTertiary";
 import { IconWithText } from "../IconWithText";
 
-export const HeadingBox = () => {
+export const HeadingBox = ({ name, duration, description }) => {
   const headingTertiary = {
-    text: "The Sea Explorer tour",
+    text: name + " Tour",
     isPrimary: true,
   };
 
   const icons = [
     {
-      text: "7 days",
+      text: duration + " days",
       Icon: (
         <svg id="icon-clock" viewBox="0 0 24 24">
           <title>clock</title>
@@ -24,7 +24,7 @@ export const HeadingBox = () => {
       isIconWhite: true,
     },
     {
-      text: "Miami, USA",
+      text: description,
       Icon: (
         <svg id="icon-map-pin" viewBox="0 0 24 24">
           <title>map-pin</title>
@@ -42,8 +42,10 @@ export const HeadingBox = () => {
       <HeadingTertiary {...headingTertiary} />
       {/* <HeadingPrimary>The Sea Explorer tour</HeadingPrimary> */}
       <HeadingBoxGroup>
-        {icons.map(({ Icon, ...props }) => (
-          <IconWithText {...props}>{Icon}</IconWithText>
+        {icons.map(({ Icon, ...props }, index) => (
+          <IconWithText {...props} key={index}>
+            {Icon}
+          </IconWithText>
         ))}
       </HeadingBoxGroup>
     </HeadingBoxW>

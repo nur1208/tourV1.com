@@ -1,15 +1,30 @@
-import React from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import ReactMapGL, { Marker, Popup } from "react-map-gl";
 
 import { MapWrapper } from "../../styledComps/tourDetails/mapSC";
 
-export const Map = () => {
+export const Map = ({ locations }) => {
+  // const [stateLocations, setStateLocations] = useState({});
+  const [isOpens, setIsOpens] = useState([]);
   const [viewport, setViewport] = React.useState({
-    longitude: -80.185942,
-    latitude: 25.774772,
-    zoom: 14,
+    longitude: locations
+      ? locations[0].coordinates[0]
+      : -80.185942,
+    latitude: locations ? locations[0].coordinates[1] : 25.774772,
+    zoom: 6.87523408007962,
   });
 
+  useEffect(() => {
+    if (locations) {
+      setIsOpens(Array(locations.length).fill(true));
+      setViewport({
+        ...viewport,
+        longitude: locations[0].coordinates[0],
+        latitude: locations[0].coordinates[1],
+      });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [locations]);
   return (
     <MapWrapper id="" image="../img/pin.png">
       <ReactMapGL
@@ -21,14 +36,34 @@ export const Map = () => {
         className="mapWrapper"
         scrollZoom={false}
       >
-        <Marker latitude={25.774772} longitude={-80.185942} />
-
-        <Popup
-          latitude={25.774772}
-          longitude={-80.185942 + 0.0008}
-        >
-          <div>Day 1: Lummus Park Beach</div>
-        </Popup>
+        {locations &&
+          locations.map(
+            ({ coordinates, day, description }, index) => (
+              <Fragment key={index}>
+                <Marker
+                  latitude={coordinates[1]}
+                  longitude={coordinates[0]}
+                />
+                {isOpens[index] && (
+                  <Popup
+                    latitude={coordinates[1] - 0.1}
+                    longitude={coordinates[0] + 0.1}
+                    onClose={() =>
+                      setIsOpens(
+                        isOpens.map((item, openIndex) =>
+                          openIndex === index ? false : item
+                        )
+                      )
+                    }
+                  >
+                    <div>
+                      Day {day}: {description}
+                    </div>
+                  </Popup>
+                )}
+              </Fragment>
+            )
+          )}
       </ReactMapGL>
     </MapWrapper>
   );
