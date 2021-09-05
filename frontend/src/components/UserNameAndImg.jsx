@@ -5,15 +5,24 @@ import { TwoTexts } from "./tourDetails/TwoTexts";
 
 export const UserNameAndImg = ({ image, name, type }) => {
   const twoTextsProps = {
-    first: type,
-    second: name,
+    first: name,
+    second: type,
     hasSecond: type,
   };
 
   return (
     <>
       <UserImage src={image} alt={`Photo of ${name}`} />
-      <TwoTexts {...twoTextsProps} />
+      {/* <TwoTexts {...twoTextsProps} /> */}
+
+      {type ? (
+        <>
+          <Label> {type}</Label>
+          <Text> {name}</Text>
+        </>
+      ) : (
+        <span> {name}</span>
+      )}
     </>
   );
 };

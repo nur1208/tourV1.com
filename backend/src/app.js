@@ -7,6 +7,7 @@ import mongoSanitize from "express-mongo-sanitize";
 import xss from "xss-clean";
 import hpp from "hpp";
 import path from "path";
+import cors from "cors";
 
 import AppError from "../utils/appError.js";
 import tourRouter from "./routers/tourRouter.js";
@@ -69,6 +70,8 @@ app.use(
     ],
   })
 );
+
+app.use(cors({ origin: "http://localhost:3000" }));
 
 // test
 app.use((req, res, next) => {

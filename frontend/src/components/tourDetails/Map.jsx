@@ -5,15 +5,13 @@ import { MapWrapper } from "../../styledComps/tourDetails/mapSC";
 
 export const Map = () => {
   const [viewport, setViewport] = React.useState({
-    longitude: -122.45,
-    latitude: 37.78,
-    // width: "100vw",
-    // height: "100vh",
+    longitude: -80.185942,
+    latitude: 25.774772,
     zoom: 14,
   });
 
   return (
-    <MapWrapper id="">
+    <MapWrapper id="" image="../img/pin.png">
       <ReactMapGL
         {...viewport}
         width="100%"
@@ -21,18 +19,15 @@ export const Map = () => {
         mapboxApiAccessToken="pk.eyJ1IjoibnVyMTIwOCIsImEiOiJja3Q1bnV5eDEwYWJrMm9vN3NvNm9pbG90In0.OSXoPwym8vl971TUr4FTRQ"
         onViewportChange={setViewport}
         className="mapWrapper"
-        // onLoad={addLines}
-        // ref={mapRef}
+        scrollZoom={false}
       >
-        {/* <Source id="my-data" type="geojson" data={geojson}>
-          <Layer />
-        </Source> */}
-        <Marker latitude={37.78} longitude={-122.45}>
-          <div>state</div>
-        </Marker>
+        <Marker latitude={25.774772} longitude={-80.185942} />
 
-        <Popup latitude={37.78} longitude={-122.442}>
-          <div>state</div>
+        <Popup
+          latitude={25.774772}
+          longitude={-80.185942 + 0.0008}
+        >
+          <div>Day 1: Lummus Park Beach</div>
         </Popup>
       </ReactMapGL>
     </MapWrapper>

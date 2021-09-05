@@ -12,8 +12,8 @@ export const MapWrapper = styled.section`
     width: 100%;
   }
 
-  .marker {
-    background-image: url("../img/pin.png");
+  .mapboxgl-marker {
+    background-image: url(${({ image }) => image});
     background-size: cover;
     width: 32px;
     height: 40px;

@@ -5,7 +5,6 @@ import { HomeScreen } from "./screens/HomeScreen";
 import { GlobalStyle } from "./styledComps/GlobalStyle";
 import { Switch, Route } from "react-router-dom";
 import { TourDetails } from "./components/TourDetails";
-import { Test } from "./Test";
 
 function App() {
   return (
@@ -13,11 +12,9 @@ function App() {
       <GlobalStyle />
       <Header />
       <Switch>
-        <Route path="/test" component={Test} />
         <Route path="/:slug" component={TourDetails} />
         <Route path="/" component={HomeScreen} exact />
       </Switch>
-      {/* <HomeScreen /> */}
       <Footer />
     </>
   );

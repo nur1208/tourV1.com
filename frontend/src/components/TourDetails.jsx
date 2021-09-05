@@ -5,10 +5,12 @@ import {
   TourDetailsW,
 } from "../styledComps/tourDetails";
 import { Image } from "./Image";
+import { Cta } from "./tourDetails/Cta";
 import { Description } from "./tourDetails/Description";
 import { HeadingBox } from "./tourDetails/HeadingBox";
 import { Images } from "./tourDetails/Images";
 import { Map } from "./tourDetails/Map";
+import { Reviews } from "./tourDetails/Reviews";
 
 export const TourDetails = () => {
   const imageProps = {
@@ -33,6 +35,8 @@ export const TourDetails = () => {
       <Description />
       <Images />
       <Map />
+      <Reviews />
+      <Cta />
     </>
   );
 };
