@@ -9,17 +9,6 @@ export const CardDetails = ({
   stops,
   maxGroupSize,
 }) => {
-  useEffect(() => {
-    if (startDate) {
-      const monthAndYear = getMonthAndYear(startDate);
-      console.log(typeof date);
-      console.log({
-        description,
-        startDate: monthAndYear,
-      });
-    }
-  }, [description, startDate]);
-
   const IconWithTexts = [
     {
       text: description,

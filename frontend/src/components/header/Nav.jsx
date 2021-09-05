@@ -11,15 +11,20 @@ export const Nav = ({ isTours, isUser, navItems }) => {
   return (
     <NavContainer id="NavContainer" {...navContainerProps}>
       {navItems &&
-        navItems.map(({ title, options, href }) =>
+        navItems.map(({ title, options, href, onClickHandler }) =>
           !options ? (
-            <NavEl to={href}>{title}</NavEl>
+            <NavEl
+              to={onClickHandler ? false : href}
+              onClick={onClickHandler}
+            >
+              {title}
+            </NavEl>
           ) : (
             <NavEl>
               {options.isLoggedIn ? (
                 <UserNameAndImg
                   image={options.image}
-                  name="Ayla"
+                  name={options.username}
                 />
               ) : (
                 <Button />

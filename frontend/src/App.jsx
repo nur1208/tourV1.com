@@ -6,10 +6,18 @@ import { GlobalStyle } from "./styledComps/GlobalStyle";
 import { Switch, Route } from "react-router-dom";
 import { TourDetails } from "./components/TourDetails";
 import { LoginScreen } from "./screens/LoginScreen";
+import { useReducer } from "react";
+import { Application } from "./reducers/userReducer";
 
 function App() {
+  const [state, dispatch] = useReducer(function (
+    state = [],
+    action
+  ) {
+    return [...state, action];
+  });
   return (
-    <>
+    <Application.Provider value={{ state, dispatch }}>
       <GlobalStyle />
       <Header />
       <Switch>
@@ -18,7 +26,7 @@ function App() {
         <Route path="/" component={HomeScreen} exact />
       </Switch>
       <Footer />
-    </>
+    </Application.Provider>
   );
 }
 

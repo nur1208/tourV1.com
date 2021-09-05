@@ -19,8 +19,8 @@ POST {{Host}}:{{port}}/{{route}}/login
 Content-Type: application/json
 
 {
-    "email":"lisa@example.com",
-    "password":"test1234"
+    "email":"nena@nena.com",
+    "password":"12345678"
 } 
 
 ###

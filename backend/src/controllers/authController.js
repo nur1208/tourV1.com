@@ -79,6 +79,7 @@ export const signUp = catchAsync(async (req, res) => {
 
 export const login = catchAsync(async (req, res, next) => {
   const { email, password } = req.body;
+  // console.log("here");
 
   // 1 check if email and password exist
 
@@ -92,14 +93,17 @@ export const login = catchAsync(async (req, res, next) => {
 
   const user = await User.findOne({ email }).select("+password");
 
+
+  const isCorrectPassword = await user.correctPassword(
+    password,
+    user.password
+  );
+console.log({ isCorrectPassword });
+
+
   // 401 means unauthorized
-  if (
-    !user ||
-    !(await user.correctPassword(password, user.password))
-  ) {
-    return next(
-      new AppError("Incorrect email or password", 401)
-    );
+  if (!user || !isCorrectPassword) {
+    return next(new AppError("Incorrect email or password", 401));
   }
 
   // 3 if the everything okay send the token to the clint
@@ -207,8 +211,7 @@ export const forgetPassword = catchAsync(
     try {
       await sendEmail({
         email: user.email,
-        subject:
-          "your password reset token valid for 10 minutes",
+        subject: "your password reset token valid for 10 minutes",
         message,
       });
 
@@ -273,9 +276,7 @@ export const updatePassword = async (req, res, next) => {
   );
 
   if (!user) {
-    return next(
-      new AppError("user with that id not exist", 404)
-    );
+    return next(new AppError("user with that id not exist", 404));
   }
   // 2 ) check if posted current password is correct
 

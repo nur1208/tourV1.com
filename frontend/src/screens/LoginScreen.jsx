@@ -1,13 +1,33 @@
-import React, { useState } from "react";
+import React, { useContext, useReducer, useState } from "react";
 import { Form } from "../components/Form";
+import userReducer, {
+  Application,
+  userInitialState,
+  USER_LOGGED_IN,
+} from "../reducers/userReducer";
+import { login } from "../sendHttpRequests/auth";
 import { LoginScreenW } from "../styledComps/loginScreenSC";
 
-export const LoginScreen = () => {
+export const LoginScreen = ({ history }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  // const [{ isLoggedIn }, dispatch] = useReducer(
+  //   userReducer,
+  //   userInitialState
+  // );
 
-  const handleOnSubmit = () => {
-    console.log({ email, password });
+  const { dispatch } = useContext(Application);
+
+  const handleOnSubmit = async () => {
+    const isLoggedIn = await login(email, password);
+
+    // console.log({ isLoggedIn });
+    // setTours(doc);
+    if (isLoggedIn) {
+      dispatch({ type: USER_LOGGED_IN });
+
+      history.push("/");
+    }
   };
   const fields = [
     {
