@@ -6,13 +6,22 @@ import { HeadingSecondary } from "../styledComps/tourDetails/overviewBoxGroupSC"
 import { Button } from "./Button";
 import { FormGroup } from "./FormGroup";
 
-export const Form = ({ fields, handleOnSubmit }) => {
-  const buttonProps = { isGreen: true, text: "Login", isV2: true };
+export const Form = ({
+  fields,
+  handleOnSubmit,
+  title,
+  btnText,
+}) => {
+  const buttonProps = {
+    isGreen: true,
+    text: btnText ? btnText : "Login",
+    isV2: true,
+  };
 
   return (
     <FormW id="FormW">
       <HeadingSecondary id="HeadingSecondary">
-        Log into your account
+        {title}
       </HeadingSecondary>
       <FormNotComp id="FormNotComp">
         {fields.map((field) => (

@@ -13,9 +13,10 @@ export const FormGroup = ({
   minLength,
   value,
   setValue,
+  id,
 }) => {
   const formInputProps = {
-    id: type,
+    id,
     type,
     placeholder,
     value,
@@ -25,7 +26,7 @@ export const FormGroup = ({
   };
   return (
     <FormGroupW id="FormGroupW">
-      <FormLabel id="FormLabel" for={type}>
+      <FormLabel id="FormLabel" for={id}>
         {label}
       </FormLabel>
       <FormInput id="FormInput" {...formInputProps} />

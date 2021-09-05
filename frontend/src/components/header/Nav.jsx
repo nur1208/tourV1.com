@@ -27,7 +27,7 @@ export const Nav = ({ isTours, isUser, navItems }) => {
                   name={options.username}
                 />
               ) : (
-                <Button />
+                <Button to={href} />
               )}
             </NavEl>
           )

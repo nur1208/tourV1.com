@@ -44,6 +44,7 @@ export const Header = () => {
         href: "/login",
       },
       {
+        href: "/sign-up",
         options: {
           username,
           isLoggedIn,
@@ -56,7 +57,7 @@ export const Header = () => {
   useEffect(() => {
     if (localStorage.getItem("username")) {
       setUsername(localStorage.getItem("username"));
-      // dispatch({ type: USER_LOGGED_IN });
+      dispatch({ type: USER_LOGGED_IN });
     }
   }, []);
   return (

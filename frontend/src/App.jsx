@@ -8,6 +8,7 @@ import { TourDetails } from "./components/TourDetails";
 import { LoginScreen } from "./screens/LoginScreen";
 import { useReducer } from "react";
 import { Application } from "./reducers/userReducer";
+import { SignUpScreen } from "./screens/SignUpScreen";
 
 function App() {
   const [state, dispatch] = useReducer(function (
@@ -21,6 +22,7 @@ function App() {
       <GlobalStyle />
       <Header />
       <Switch>
+        <Route path="/sign-up" component={SignUpScreen} />
         <Route path="/login" component={LoginScreen} />
         <Route path="/:slug" component={TourDetails} />
         <Route path="/" component={HomeScreen} exact />
