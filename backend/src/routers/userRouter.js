@@ -15,9 +15,13 @@ import {
   getAllUsers,
   getMe,
   getUser,
+  resizeUserPhoto,
   updateMe,
   updateUser,
+  uploadUserPhoto,
 } from "../controllers/userController.js";
+
+// multer is  middleware for multi-part form data
 
 const router = express.Router();
 
@@ -34,7 +38,12 @@ router.use(protect);
 // all the route in here have the protect middleware in their middleware stick
 router.patch("/updateMyPassword", updatePassword);
 
-router.patch("/updateMe", updateMe);
+router.patch(
+  "/updateMe",
+  uploadUserPhoto,
+  resizeUserPhoto,
+  updateMe
+);
 router.delete("/deleteMe", deleteMe);
 router.get("/me", getMe, getUser);
 

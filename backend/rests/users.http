@@ -27,16 +27,39 @@ Content-Type: application/json
     "name":"nur"
 }
 
-###
-PATCH  {{Host}}:{{port}}/{{route}}/updateMe 
-Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxMmI3YzZiMDIxYjQ3MzRjY2IyNjE4YiIsImlhdCI6MTYzMDMyNjY5NCwiZXhwIjoxNjM4MDE2Mjk0fQ.DiCCc-nrkgaDRw526P_ySQkfuim5giqv-MvxepQgFzM
 
-{
-    "name":"john5",
-    "email":"john5@bob.com",
-    "role":"admin"
-}
+###
+
+PATCH {{Host}}:{{port}}/{{route}}/612e92cac3d6533558e08307
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxMzQ4NzdmZjY0Y2YyM2MyODczNzE3YiIsImlhdCI6MTYzMDkyMzgxOSwiZXhwIjoxNjM4NjEzNDE5fQ.GW0b5FhW1nznjKPkfxs4SnES3wF6Mw4vWb_22l1h-9Q
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="text"
+
+title
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="image"; filename="1.png"
+Content-Type: image/png
+
+< ./1.png
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+###
+
+PATCH  {{Host}}:{{port}}/{{route}}/updateMe 
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxMzQ4NzdmZjY0Y2YyM2MyODczNzE3YiIsImlhdCI6MTYzMDkyMzgxOSwiZXhwIjoxNjM4NjEzNDE5fQ.GW0b5FhW1nznjKPkfxs4SnES3wF6Mw4vWb_22l1h-9Q
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="text"
+
+title
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="photo"; filename="1.png"
+Content-Type: image/png
+
+< ../dev-data/img/new-tour-1.jpg
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
 
 
 

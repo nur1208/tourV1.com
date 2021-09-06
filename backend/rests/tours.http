@@ -10,7 +10,7 @@ GET {{Host}}:5000/
 ###
 
 GET {{Host}}:{{port}}/{{route}}?price[lt]=1000
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxMmU5MmNhYzNkNjUzMzU1OGUwODMwNyIsImlhdCI6MTYzMDQ0Mjk5MSwiZXhwIjoxNjM4MTMyNTkxfQ.gAUdS8s6WeZw5PFL2xTla0tHqjORvkttkVP3ohgl7NY
+Authorization: Bearer "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxMzQ4NzdmZjY0Y2YyM2MyODczNzE3YiIsImlhdCI6MTYzMDkxMDE1MywiZXhwIjoxNjM4NTk5NzUzfQ.aByVLu1q8H79FArKLjtyfwj9nzyr6OdGa8uOFQXiVKs"
 ###
 
 GET {{Host}}:{{port}}/{{route}}/5c88fa8cf4afda39709c295d

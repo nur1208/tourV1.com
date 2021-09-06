@@ -19,6 +19,7 @@ export const Form = ({
   isUserView,
   isBtnRight,
   hasUpload,
+  handleUploadImage,
 }) => {
   const buttonProps = {
     isGreen: true,
@@ -44,7 +45,14 @@ export const Form = ({
               src="/img/users/user-4.jpg"
               alt="User photo"
             />
-            <FormUpload />
+            <FormUpload
+              accept="image/*"
+              id="photo"
+              name="photo"
+              type="file"
+              // value={file}
+              onChange={handleUploadImage}
+            />
             <label for="photo">Choose new photo</label>
           </FormPhotoUpload>
         )}

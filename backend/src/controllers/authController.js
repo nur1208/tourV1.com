@@ -93,13 +93,11 @@ export const login = catchAsync(async (req, res, next) => {
 
   const user = await User.findOne({ email }).select("+password");
 
-
   const isCorrectPassword = await user.correctPassword(
     password,
     user.password
   );
-console.log({ isCorrectPassword });
-
+  console.log({ isCorrectPassword });
 
   // 401 means unauthorized
   if (!user || !isCorrectPassword) {
@@ -121,6 +119,8 @@ console.log({ isCorrectPassword });
 
 export const protect = catchAsync(async (req, res, next) => {
   let token;
+  // console.log(`here`);
+
   // 1 getting token and check if it's there
   if (
     req.headers.authorization &&

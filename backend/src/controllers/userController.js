@@ -1,3 +1,5 @@
+import multer from "multer";
+import sharp from "sharp";
 import catchAsync from "../../utils/catchAsync.js";
 import User from "../models/userModel.js";
 import AppError from "../../utils/appError.js";
@@ -7,6 +9,67 @@ import {
   getOne,
   updateOne,
 } from "./handlerFactory.js";
+// create our customs upload (we need multerStorage and multerFilter)
+// const multerStorage = multer.diskStorage({
+//   destination: (req, file, cb) => {
+//     cb(null, "public/img/users");
+//   },
+//   // file is the file object that we consoled it
+//   filename: (req, file, cb) => {
+//     // user-userId-timeStamp.jpeg
+//     const ext = file.mimetype.split("/")[1];
+//     cb(null, `user-${req.user._id}-${Date.now()}.${ext}`);
+//   },
+// });
+
+const multerStorage = multer.memoryStorage();
+
+// we use multerFilter to check if the file image or not
+// for security propose
+// cb(error,value you want to pass)
+const multerFilter = (req, file, cb) => {
+  if (file.mimetype.startsWith("image")) {
+    cb(null, true);
+  } else {
+    cb(
+      new AppError("Not image! Please upload only images", 400),
+      false
+    );
+  }
+};
+
+export const upload = multer({
+  storage: multerStorage,
+  fileFilter: multerFilter,
+});
+
+const filterObj = (obj, ...allowedFields) => {
+  const newObj = {};
+  Object.keys(obj).forEach((el) => {
+    if (allowedFields.includes(el)) newObj[el] = obj[el];
+  });
+
+  return newObj;
+};
+
+export const uploadUserPhoto = upload.single("photo");
+
+export const resizeUserPhoto = (req, res, next) => {
+  // no image to resize
+  if (!req.file) return next();
+  // now this then crop the image so  that it conver this entire 500 * 500 square
+
+  req.file.filename = `user-${req.user._id}-${Date.now()}.jpeg`;
+
+  sharp(req.file.buffer)
+    .resize(500, 500)
+    .toFormat("jpeg")
+    .jpeg({ quality: 90 })
+    .toFile(`public/img/users/${req.file.filename}`);
+  // we going to use the sharp package to resize the image
+
+  next();
+};
 
 export const getAllUsers = getAll(User);
 
@@ -52,15 +115,20 @@ export const updateMe = catchAsync(async (req, res, next) => {
     );
   }
   // 2) update user current data
-  const { name, email } = req.body;
-  const updatedUser = await User.findByIdAndUpdate(
-    req.user.id,
-    { name, email },
-    { new: true, runValidators: true }
-  );
+
+  const filteredBody = filterObj(req.body, "name", "email");
+  if (req.file) filteredBody.photo = req.file.filename;
+
+  console.log({ file: req.file, body: req.body });
+
+  // const updatedUser = await User.findByIdAndUpdate(
+  //   req.user.id,
+  //   filteredBody,
+  //   { new: true, runValidators: true }
+  // );
 
   res.status(200).json({
     status: "success",
-    data: { user: updatedUser },
+    // data: { user: updatedUser },
   });
 });

@@ -1,6 +1,8 @@
+import multer from "multer";
 import AppError from "../../utils/appError.js";
 import catchAsync from "../../utils/catchAsync.js";
 import Tour from "../models/tourModel.js";
+// import image from "../dev-data/img/user-1.jpg";
 import {
   createOne,
   deleteOne,
@@ -8,6 +10,32 @@ import {
   getOne,
   updateOne,
 } from "./handlerFactory.js";
+
+const multerStorage = multer.memoryStorage();
+
+// we use multerFilter to check if the file image or not
+// for security propose
+// cb(error,value you want to pass)
+const multerFilter = (req, file, cb) => {
+  if (file.mimetype.startsWith("image")) {
+    cb(null, true);
+  } else {
+    cb(
+      new AppError("Not image! Please upload only images", 400),
+      false
+    );
+  }
+};
+
+export const upload = multer({
+  storage: multerStorage,
+  fileFilter: multerFilter,
+});
+
+export const uploadTourImages = upload.fields([
+  { name: "imageCover", maxCount: 1 },
+  { name: "images", maxCount: 3 },
+]);
 
 export const aliasTopTours = (req, res, next) => {
   req.query.limit = 5;

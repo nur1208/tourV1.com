@@ -8,10 +8,10 @@ export const login = async (email, password) => {
       `${HOST}${TOURS_ROUTE}/login`,
       { email, password }
     );
-    console.log({ data });
+    // console.log({ data });
     localStorage.setItem("username", data.data.user.name);
     // console.log(localStorage.getItem("username"));
-    return true;
+    return data.data.user;
     // return data.data.doc;
   } catch (error) {
     console.log({ error });

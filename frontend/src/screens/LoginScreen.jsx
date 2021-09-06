@@ -19,12 +19,12 @@ export const LoginScreen = ({ history }) => {
   const { dispatch } = useContext(Application);
 
   const handleOnSubmit = async () => {
-    const isLoggedIn = await login(email, password);
+    const userData = await login(email, password);
 
-    // console.log({ isLoggedIn });
+    // console.log({ userData });
     // setTours(doc);
-    if (isLoggedIn) {
-      dispatch({ type: USER_LOGGED_IN });
+    if (userData) {
+      dispatch({ type: USER_LOGGED_IN, payload: userData });
 
       history.push("/");
     }

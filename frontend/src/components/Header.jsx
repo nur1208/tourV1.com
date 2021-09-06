@@ -16,7 +16,7 @@ import { Nav } from "./header/Nav";
 export const Header = () => {
   // const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [username, setUsername] = useState("");
-  const [{ isLoggedIn }, dispatch] = useReducer(
+  const [{ isLoggedIn, user }, dispatch] = useReducer(
     userReducer,
     userInitialState
   );
@@ -55,11 +55,13 @@ export const Header = () => {
   };
 
   useEffect(() => {
-    if (localStorage.getItem("username")) {
-      setUsername(localStorage.getItem("username"));
-      dispatch({ type: USER_LOGGED_IN });
+    if (user) {
+      setUsername(user.name);
+      dispatch({ type: USER_LOGGED_IN, payload: user });
+    } else {
+      setUsername("");
     }
-  }, []);
+  }, [user]);
   return (
     <Container id="Container">
       <Nav {...navTourProps} />
