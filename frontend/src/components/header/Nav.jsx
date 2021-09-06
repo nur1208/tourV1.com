@@ -20,7 +20,7 @@ export const Nav = ({ isTours, isUser, navItems }) => {
               {title}
             </NavEl>
           ) : (
-            <NavEl>
+            <NavEl to={href}>
               {options.isLoggedIn ? (
                 <UserNameAndImg
                   image={options.image}

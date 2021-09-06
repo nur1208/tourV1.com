@@ -44,7 +44,7 @@ export const Header = () => {
         href: "/login",
       },
       {
-        href: "/sign-up",
+        href: isLoggedIn ? "/me" : "/sign-up",
         options: {
           username,
           isLoggedIn,

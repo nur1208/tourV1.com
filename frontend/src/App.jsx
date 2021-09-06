@@ -9,6 +9,7 @@ import { LoginScreen } from "./screens/LoginScreen";
 import { useReducer } from "react";
 import { Application } from "./reducers/userReducer";
 import { SignUpScreen } from "./screens/SignUpScreen";
+import { MeScreen } from "./components/MeScreen";
 
 function App() {
   const [state, dispatch] = useReducer(function (
@@ -22,6 +23,7 @@ function App() {
       <GlobalStyle />
       <Header />
       <Switch>
+        <Route path="/me" component={MeScreen} />
         <Route path="/sign-up" component={SignUpScreen} />
         <Route path="/login" component={LoginScreen} />
         <Route path="/:slug" component={TourDetails} />
