@@ -6,6 +6,7 @@ import catchAsync from "../../utils/catchAsync.js";
 import User from "../models/userModel.js";
 import AppError from "../../utils/appError.js";
 import sendEmail from "../../utils/sendEmail.js";
+import { Email } from "../../utils/email.js";
 
 const signToken = (id) => {
   const { JWT_SECRET, JWT_EXPIRES_IN } = process.env;
@@ -66,6 +67,20 @@ export const signUp = catchAsync(async (req, res) => {
     role,
   });
 
+  const url = `${req.protocol}://${req.get("host")}/me`;
+  console.log({ url });
+
+  // await new Email(newUser, url).sendWelcome();
+  // await new Email(newUser, url).sendEmailDev(
+  //   "welcome",
+  //   "Welcome to tour.com"
+  // );
+
+  // await sendEmail({
+  //   email: newUser.email,
+  //   subject: "your password reset token valid for 10 minutes",
+  //   message: "something",
+  // });
   createSendToken(newUser, 201, res);
 
   // const token = signToken(newUser._id);

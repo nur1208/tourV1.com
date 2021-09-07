@@ -6,11 +6,10 @@ POST {{Host}}:{{port}}/{{route}}/signup
 Content-Type: application/json
      
 {
-    "name":"monco",
-    "email":"monco@monco.com",
+    "name":"test3",
+    "email":"tdd3@tewsst3.com",
     "password":"12345678",
-    "passwordConfirm":"12345678",
-    "role":"admin"
+    "passwordConfirm":"12345678"
 } 
 
 ###
