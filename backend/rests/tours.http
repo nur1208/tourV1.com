@@ -51,14 +51,36 @@ GET {{Host}}:5000/{{route}}/6123d05b017d8509c8c2fc59
 
 
 ###
-PATCH {{Host}}:5000/{{route}}/6123d05b017d8509c8c2fc59
-Content-Type: application/json
+PATCH {{Host}}:5000/{{route}}/6136b03e805c19a9f22f6126
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxMzZiMjVlYmY4ODlmMmMwOGZjYmNmMyIsImlhdCI6MTYzMDk3NDcxMiwiZXhwIjoxNjM4NjY0MzEyfQ.mWWup12gSQsaMw9zTc9c50VpJ-Q4cXTZeCb1m33IrJY
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
 
-{
-    "name":"update tour",
-    "price":4, 
-    "rating": 4.2
-}
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="price"
+
+900
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="imageCover"; filename="new-tour-1.jpg"
+Content-Type: image/jpeg
+
+< ../dev-data/img/new-tour-1.jpg
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="images"; filename="new-tour-2.jpg"
+Content-Type: image/jpeg
+
+< ../dev-data/img/new-tour-2.jpg
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="images"; filename="new-tour-3.jpg"
+Content-Type: image/jpeg
+
+< ../dev-data/img/new-tour-3.jpg
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="images"; filename="new-tour-4.jpg"
+Content-Type: image/jpeg
+
+< ../dev-data/img/new-tour-4.jpg
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+
 
 ###
 

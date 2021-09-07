@@ -11,10 +11,12 @@ process.on("uncaughtException", (err) => {
 });
 
 const main = async () => {
-  const DB = process.env.DATABASE.replace(
-    "<PASSWORD>",
-    process.env.DATABASE_PASSWORD
-  );
+  // const DB = process.env.DATABASE.replace(
+  //   "<PASSWORD>",
+  //   process.env.DATABASE_PASSWORD
+  // );
+
+  const DB = process.env.DATABASE_LOCAL;
 
   await mongoose.connect(DB, {
     useNewUrlParser: true,

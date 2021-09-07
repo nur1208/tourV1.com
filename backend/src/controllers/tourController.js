@@ -1,4 +1,5 @@
 import multer from "multer";
+import sharp from "sharp";
 import AppError from "../../utils/appError.js";
 import catchAsync from "../../utils/catchAsync.js";
 import Tour from "../models/tourModel.js";
@@ -32,10 +33,52 @@ export const upload = multer({
   fileFilter: multerFilter,
 });
 
+// this will add files to the request object and also upload.array
+// but upload file will add file to it
 export const uploadTourImages = upload.fields([
   { name: "imageCover", maxCount: 1 },
   { name: "images", maxCount: 3 },
 ]);
+
+export const resizeTourImages = catchAsync(
+  async (req, res, next) => {
+    console.log({ files: req.files, body: req.body });
+
+    if (!req.files.imageCover || !req.files.images) return next();
+
+    // Cover image
+    const imageCoverFilename = `tour-${
+      req.params.id
+    }-${Date.now()}-cover.jpeg`;
+    await sharp(req.files.imageCover[0].buffer)
+      .resize(2000, 1333)
+      .toFormat("jpeg")
+      .jpeg({ quality: 90 })
+      .toFile(`public/img/tours/${imageCoverFilename}`);
+
+    req.body.imageCover = imageCoverFilename;
+    // images
+    req.body.images = [];
+
+    await Promise.all(
+      req.files.images.map(async (file, i) => {
+        const filename = `tour-${req.params.id}-${Date.now()}-${
+          i + 1
+        }.jpeg`;
+
+        await sharp(file.buffer)
+          .resize(2000, 1333)
+          .toFormat("jpeg")
+          .jpeg({ quality: 90 })
+          .toFile(`public/img/tours/${filename}`);
+
+        req.body.images.push(filename);
+      })
+    );
+
+    next();
+  }
+);
 
 export const aliasTopTours = (req, res, next) => {
   req.query.limit = 5;

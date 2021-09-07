@@ -54,22 +54,24 @@ const filterObj = (obj, ...allowedFields) => {
 
 export const uploadUserPhoto = upload.single("photo");
 
-export const resizeUserPhoto = (req, res, next) => {
-  // no image to resize
-  if (!req.file) return next();
-  // now this then crop the image so  that it conver this entire 500 * 500 square
+export const resizeUserPhoto = catchAsync(
+  async (req, res, next) => {
+    // no image to resize
+    if (!req.file) return next();
+    // now this then crop the image so  that it conver this entire 500 * 500 square
 
-  req.file.filename = `user-${req.user._id}-${Date.now()}.jpeg`;
+    req.file.filename = `user-${req.user._id}-${Date.now()}.jpeg`;
 
-  sharp(req.file.buffer)
-    .resize(500, 500)
-    .toFormat("jpeg")
-    .jpeg({ quality: 90 })
-    .toFile(`public/img/users/${req.file.filename}`);
-  // we going to use the sharp package to resize the image
+    await sharp(req.file.buffer)
+      .resize(500, 500)
+      .toFormat("jpeg")
+      .jpeg({ quality: 90 })
+      .toFile(`public/img/users/${req.file.filename}`);
+    // we going to use the sharp package to resize the image
 
-  next();
-};
+    next();
+  }
+);
 
 export const getAllUsers = getAll(User);
 

@@ -28,6 +28,7 @@ export const TourDetails = ({ match }) => {
       images,
       locations,
       _id,
+      imageCover,
     },
     setTour,
   ] = useState({});
@@ -65,14 +66,14 @@ export const TourDetails = ({ match }) => {
         <HeaderHero id="HeaderHero">
           <HeaderHeroOverlay>&nbsp;</HeaderHeroOverlay>
           <img
-            src="/img/tours/tour-2-cover.jpg"
+            src={`/img/tours/${imageCover}`}
             alt="The Sea Explorer"
           />
         </HeaderHero>
         <HeadingBox {...headingBoxProps} />
       </TourDetailsW>
       <Description {...descriptionProps} />
-      <Images {...imagesProps} />
+      {images && images.length > 0 && <Images {...imagesProps} />}
       <Map {...mapProps} />
       <Reviews {...reviewsProps} />
       <Cta />

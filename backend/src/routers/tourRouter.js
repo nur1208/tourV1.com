@@ -13,7 +13,9 @@ import {
   getTour,
   getTourStats,
   getToursWithIn,
+  resizeTourImages,
   updateTour,
+  uploadTourImages,
 } from "../controllers/tourController.js";
 import reviewRouter from "./reviewRouter.js";
 
@@ -68,7 +70,13 @@ tourRouter
 tourRouter
   .route("/:id")
   .get(getTour)
-  .patch(protect, restrictTo("admin", "lead-guide"), updateTour)
+  .patch(
+    protect,
+    restrictTo("admin", "lead-guide"),
+    uploadTourImages,
+    resizeTourImages,
+    updateTour
+  )
   .delete(protect, restrictTo("admin", "lead-guide"), deleteTour);
 
 // tourRouter
