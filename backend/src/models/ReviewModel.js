@@ -91,7 +91,6 @@ reviewSchema.post("save", function () {
 // reviewSchema.pre(/^findOneAnd/, async function (next) {
 //   this.currentDocument = await this.findOne({}); // return the current document object a send the current to the post middleware
 //   // because we want to save the update data not the non-update data
-//   console.log({ this: this });
 
 //   next();
 // });

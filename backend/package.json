@@ -8,12 +8,14 @@
     "start": "nodemon  --exec node --experimental-modules src/server.js",
     "start:prod": "NODE_ENV=production nodemon  --exec node --experimental-modules src/server.js",
     "debug": "nodemon  --exec ndb --experimental-modules src/server.js",
-    "debug:prod": "NODE_ENV=production nodemon  --exec ndb --experimental-modules src/server.js"
+    "debug:prod": "NODE_ENV=production nodemon  --exec ndb --experimental-modules src/server.js",
+    "doc": "jsdoc -c jsdoc.json"
   },
   "author": "nur",
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",
+    "compression": "^1.7.4",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "express": "4",
@@ -22,6 +24,7 @@
     "helmet": "^4.6.0",
     "hpp": "^0.2.3",
     "html-to-text": "^8.0.0",
+    "jsdoc": "^3.6.7",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "5",
     "morgan": "^1.10.0",

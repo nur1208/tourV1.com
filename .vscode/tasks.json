@@ -44,6 +44,15 @@
       "label": "npm: start - frontend",
       "detail": "react-scripts start",
       "group": "build"
+    },
+    {
+      "type": "npm",
+      "script": "doc",
+      "path": "backend/",
+      "problemMatcher": [],
+      "label": "npm: doc - backend",
+      "detail": "jsdoc -c jsdoc.json",
+      "group": "build"
     }
   ]
 }

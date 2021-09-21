@@ -121,16 +121,14 @@ export const updateMe = catchAsync(async (req, res, next) => {
   const filteredBody = filterObj(req.body, "name", "email");
   if (req.file) filteredBody.photo = req.file.filename;
 
-  console.log({ file: req.file, body: req.body });
-
-  // const updatedUser = await User.findByIdAndUpdate(
-  //   req.user.id,
-  //   filteredBody,
-  //   { new: true, runValidators: true }
-  // );
+  const updatedUser = await User.findByIdAndUpdate(
+    req.user.id,
+    filteredBody,
+    { new: true, runValidators: true }
+  );
 
   res.status(200).json({
     status: "success",
-    // data: { user: updatedUser },
+    data: { user: updatedUser },
   });
 });

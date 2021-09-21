@@ -1,5 +1,5 @@
 import axios from "axios";
-const HOST = "http://127.0.0.1:5000";
+const HOST = "";
 const TOURS_ROUTE = "/api/v1/users";
 
 export const login = async (email, password) => {

@@ -15,7 +15,6 @@ export const UpdateSettingsForm = () => {
 
   const handleOnSubmit = async (e) => {
     e.preventDefault();
-    console.log({ file: selectedFile });
 
     const formData = new FormData();
     formData.append("email", "nena@nena.com");
@@ -34,8 +33,6 @@ export const UpdateSettingsForm = () => {
       formData,
       config
     );
-
-    console.log({ data });
 
     // const isLoggedIn = await login(email, password);
     // console.log({ isLoggedIn });

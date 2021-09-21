@@ -14,10 +14,8 @@ export class Email {
   newTransporter() {
     if (process.env.NODE_ENV === "development") {
       // const testAccount = await nodemailer.createTestAccount();
-      // console.log({ testAccount });
 
       // create reusable transporter object using the default SMTP transport
-      // console.log("here");
 
       return nodemailer.createTransport({
         host: "smtp.ethereal.email",
@@ -88,7 +86,7 @@ export class Email {
       from: this.from,
       to: this.email,
       subject,
-      // html,
+      html,
       // text: htmlToText.fromString(html),
       text: "something",
     });
@@ -205,6 +203,7 @@ const sendEmail = async (options) => {
     text: options.message,
   };
   // 3) send the mail with nodemailer.
+  // eslint-disable-next-line no-console
   console.log(
     "Preview URL: %s",
     nodemailer.getTestMessageUrl(mailOptions)

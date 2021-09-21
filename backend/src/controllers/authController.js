@@ -6,7 +6,7 @@ import catchAsync from "../../utils/catchAsync.js";
 import User from "../models/userModel.js";
 import AppError from "../../utils/appError.js";
 import sendEmail from "../../utils/sendEmail.js";
-import { Email } from "../../utils/email.js";
+// import { Email } from "../../utils/email.js";
 
 const signToken = (id) => {
   const { JWT_SECRET, JWT_EXPIRES_IN } = process.env;
@@ -67,8 +67,8 @@ export const signUp = catchAsync(async (req, res) => {
     role,
   });
 
-  const url = `${req.protocol}://${req.get("host")}/me`;
-  console.log({ url });
+  // const url = `${req.protocol}://${req.get("host")}/me`;
+  // console.log({ url });
 
   // await new Email(newUser, url).sendWelcome();
   // await new Email(newUser, url).sendEmailDev(
@@ -112,7 +112,7 @@ export const login = catchAsync(async (req, res, next) => {
     password,
     user.password
   );
-  console.log({ isCorrectPassword });
+  // console.log({ isCorrectPassword });
 
   // 401 means unauthorized
   if (!user || !isCorrectPassword) {

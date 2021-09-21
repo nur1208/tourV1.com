@@ -31,17 +31,17 @@ const reviews = JSON.parse(
   fs.readFileSync("reviews.json", "utf-8")
 );
 
-console.log({ tours, Tour });
+// console.log({ tours, Tour });
 
 const importData = async () => {
   try {
     await Tour.create(tours);
     await User.create(users, { validateBeforeSave: false });
     await Review.create(reviews);
-    console.log("data successfully loaded");
+    // console.log("data successfully loaded");
     process.exit();
   } catch (error) {
-    console.log({ error });
+    // console.log({ error });
   }
 };
 
@@ -51,9 +51,9 @@ const deleteData = async () => {
     await Tour.deleteMany();
     await User.deleteMany();
     await Review.deleteMany();
-    console.log("Data successfully deleted!");
+    // console.log("Data successfully deleted!");
   } catch (err) {
-    console.log(err);
+    // console.log(err);
   }
   process.exit();
 };
@@ -64,4 +64,4 @@ if (process.argv[2] === "--import") {
   deleteData();
 }
 
-console.log({ argv: process.argv });
+// console.log({ argv: process.argv });
