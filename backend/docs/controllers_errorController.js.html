@@ -32,12 +32,21 @@
  * @file
  * file for handle all the expect error in our server
  */
+
+/**
+ * - handling mongoose CastError
+ * - that will happened when a wrong document's _id passed to the model
+ */
 const handleCastErrorDB = (err) => {
   const message = `Invalid ${err.path}: ${err.value}`;
 
   return new AppError(message, 400);
 };
 
+/**
+ *  handling mongoose duplicate fields for unique fields
+ *
+ */
 const handleDuplicateFieldsDB = (err) => {
   const value = err.message.match(/(["'])(?:(?=(\\?))\2.)*?\1/)[0];
   // const value = err.keyValue.name;
@@ -47,6 +56,10 @@ const handleDuplicateFieldsDB = (err) => {
   return new AppError(message, 400);
 };
 
+/**
+ * handling mongoose validation error failed that we set in a schema
+ *
+ */
 const handleValidationErrorDB = (err) => {
   // loop through object
   const errors = Object.values(err.errors).map((el) => el.message);
@@ -54,17 +67,33 @@ const handleValidationErrorDB = (err) => {
   return new AppError(message, 400);
 };
 
+/**
+ * - handling Json web token error
+ * - that will happen when the user passed invalid jwt
+ */
 const handleJWTError = () =>
   new AppError("Invalid token, Please login again", 401);
 
+/**
+ * - handling expired token error
+ * - that will happen when the user passed expired token
+ */
 const handleJWTExpired = () =>
   new AppError("Your token has expired! please login again", 401);
 
+/**
+ *  - handling expired token error
+ * - that will happen when the user passed token has created before the user change his/her password
+ */
 const handleJWTRecentlyCPError = () =>
   new AppError(
     "User recently changed password! Please log in again",
     401
   );
+
+/**
+ * send long error with all the details to the developer
+ */
 const sendErrorDev = (err, res) => {
   res.status(err.statusCode).json({
     status: err.status,
@@ -91,25 +120,37 @@ const sendErrorProd = (err, res) => {
 };
 
 /**
- * - globalErrorHandler middleware for handler any expect error in our server
- * - it's error middleware and express knows that bey looking at the number of parameters of the middleware if it is 4 parameters then this is error middleware
+ * - globalErrorHandler middleware for handling any expect error in our server
+ * - it's error middleware and express knows that by looking at the number of parameters of the middleware if it is 4 parameters then this is error middleware
  */
 const globalErrorHandler = (err, req, res, next) => {
+  // status code, default is 500
   err.statusCode = err.statusCode || 500;
+  // status , default is error
   err.status = err.status || "error";
+
+  // send long more detailed error to the developer.
   if (process.env.NODE_ENV === "development") {
     sendErrorDev(err, res);
+    // send short error and readable to the users
   } else if (process.env.NODE_ENV === "production") {
+    // it's good practice not to modify function's parameters
     let error = { ...err };
     error.message = err.message;
+
+    // handling mongoose CastError
+    // that will happened when a wrong document's _id passed to the model
     if (error.name === "CastError") {
       error = handleCastErrorDB(error);
     }
 
+    // handling mongoose duplicate fields for unique fields
     if (error.code === 11000) {
       error = handleDuplicateFieldsDB(error);
     }
 
+    // handling mongoose validation error failed that we set
+    // in a schema
     if (
       error._message &amp;&amp;
       error._message.includes("validation failed")
@@ -117,18 +158,24 @@ const globalErrorHandler = (err, req, res, next) => {
       error = handleValidationErrorDB(error);
     }
 
+    // handling Json web token error
+    // that will happen when the user passed invalid jwt
     if (error.name === "JsonWebTokenError") {
       error = handleJWTError();
     }
 
+    // handling expired token error
+    // that will happen when the user passed expired token
     if (error.name === "TokenExpiredError") {
       error = handleJWTExpired();
     }
 
+    // handling recently changed password
     if (error.name === "TokenRecentlyChangedPasswordError") {
       error = handleJWTRecentlyCPError();
     }
 
+    // send to a error to the developer
     sendErrorProd(error, res);
   }
 };
@@ -144,13 +191,13 @@ export default globalErrorHandler;
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#addDataToRequest">addDataToRequest</a></li><li><a href="global.html#allowAccess">allowAccess</a></li><li><a href="global.html#app">app</a></li><li><a href="global.html#compressionData">compressionData</a></li><li><a href="global.html#globalErrorHandler">globalErrorHandler</a></li><li><a href="global.html#handleUnCaughtException">handleUnCaughtException</a></li><li><a href="global.html#handleWrongURL">handleWrongURL</a></li><li><a href="global.html#httpSecurityHeaders">httpSecurityHeaders</a></li><li><a href="global.html#limiter">limiter</a></li><li><a href="global.html#main">main</a></li><li><a href="global.html#morganDev">morganDev</a></li><li><a href="global.html#noSQlInjection">noSQlInjection</a></li><li><a href="global.html#preventParameterPollution">preventParameterPollution</a></li><li><a href="global.html#sanitizationXss">sanitizationXss</a></li><li><a href="global.html#staticFiles">staticFiles</a></li><li><a href="global.html#unhandledRejection">unhandledRejection</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#addDataToRequest">addDataToRequest</a></li><li><a href="global.html#allowAccess">allowAccess</a></li><li><a href="global.html#app">app</a></li><li><a href="global.html#compressionData">compressionData</a></li><li><a href="global.html#globalErrorHandler">globalErrorHandler</a></li><li><a href="global.html#handleCastErrorDB">handleCastErrorDB</a></li><li><a href="global.html#handleDuplicateFieldsDB">handleDuplicateFieldsDB</a></li><li><a href="global.html#handleJWTError">handleJWTError</a></li><li><a href="global.html#handleJWTExpired">handleJWTExpired</a></li><li><a href="global.html#handleJWTRecentlyCPError">handleJWTRecentlyCPError</a></li><li><a href="global.html#handleUnCaughtException">handleUnCaughtException</a></li><li><a href="global.html#handleValidationErrorDB">handleValidationErrorDB</a></li><li><a href="global.html#handleWrongURL">handleWrongURL</a></li><li><a href="global.html#httpSecurityHeaders">httpSecurityHeaders</a></li><li><a href="global.html#limiter">limiter</a></li><li><a href="global.html#main">main</a></li><li><a href="global.html#morganDev">morganDev</a></li><li><a href="global.html#noSQlInjection">noSQlInjection</a></li><li><a href="global.html#preventParameterPollution">preventParameterPollution</a></li><li><a href="global.html#sanitizationXss">sanitizationXss</a></li><li><a href="global.html#sendErrorDev">sendErrorDev</a></li><li><a href="global.html#staticFiles">staticFiles</a></li><li><a href="global.html#unhandledRejection">unhandledRejection</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Wed Sep 22 2021 07:51:30 GMT+0800 (China Standard Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Thu Sep 23 2021 09:13:32 GMT+0800 (China Standard Time)
 </footer>
 
 <script> prettyPrint(); </script>
