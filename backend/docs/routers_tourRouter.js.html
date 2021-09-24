@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: server.js</title>
+    <title>JSDoc: Source: routers/tourRouter.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: server.js</h1>
+    <h1 class="page-title">Source: routers/tourRouter.js</h1>
 
     
 
@@ -26,80 +26,98 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>/**
- * @file this file for everything relate to server.
- */
-// this file for everything relate to server.
-import mongoose from "mongoose";
-import app from "./app.js";
+            <pre class="prettyprint source linenums"><code>import express from "express";
+import {
+  protect,
+  restrictTo,
+} from "../controllers/authController.js";
+import {
+  aliasTopTours,
+  createTour,
+  deleteTour,
+  getAllTours,
+  getDistances,
+  getMonthlyPlan,
+  getTour,
+  getTourStats,
+  getToursWithIn,
+  resizeTourImages,
+  updateTour,
+  uploadTourImages,
+} from "../controllers/tourController.js";
+import reviewRouter from "./reviewRouter.js";
 
 /**
- *  handling uncaught Exception error globally
- * @param {TypeError} err uncaught error object
- * @returns {void}
- *
+ * @file tourRouter.js contains all the routers of tour requests
  */
-const handleUnCaughtException = (err) => {
-  // eslint-disable-next-line no-console
-  console.log("unhandled Exception Shuting down... ");
-  // eslint-disable-next-line no-console
-  console.log({ err: err.message });
-  process.exit(1);
-};
+// this is the  middleware stack
+// const m = middleware
+// morgan m - json m - clg m - adding requestedAT m
+// - tourRouter m  -  tourRouter.param m - tourRouter.route
+// - getTour
 
-process.on("uncaughtException", handleUnCaughtException);
+// this is the  middleware stack
+// const m = middleware
+// morgan m - json m - clg m - adding requestedAT m
+// - userRouter m   - tourRouter.route
+// - getUser
 
-/**
- * main function to use 'await' keyword inside server.js
- * @returns {void}
- */
-const main = async () => {
-  // const DB = process.env.DATABASE.replace(
-  //   "&lt;PASSWORD>",
-  //   process.env.DATABASE_PASSWORD
-  // );
+// this is middleware for just "/api/v1/tours/*" router
+const tourRouter = express.Router();
+// this is param middleware
+// tourRouter.param("name", checkId);
 
-  const DB = process.env.DATABASE_LOCAL;
+tourRouter.use("/:tourId/reviews", reviewRouter);
 
-  await mongoose.connect(DB, {
-    useNewUrlParser: true,
-    useCreateIndex: true,
-    useFindAndModify: false,
-  });
+// route of getting top 5 best cheapest tours using two middleware:
+// 1-  aliasTopTours
+// 2 - getAllTours
+tourRouter.route("/top-5-cheap").get(aliasTopTours, getAllTours);
 
-  // eslint-disable-next-line no-console
-  console.log("DB connection successful");
+tourRouter.route("/tour-stats").get(getTourStats);
+tourRouter
+  .route("/monthly-plan/:year")
+  .get(
+    protect,
+    restrictTo("admin", "lead-guide", "lead"),
+    getMonthlyPlan
+  );
 
-  // eslint-disable-next-line no-console
-  console.log({ env: process.env.NODE_ENV });
-};
+tourRouter
+  .route("/tours-within/:distance/center/:latLng/unit/:unit")
+  .get(getToursWithIn);
 
-const port = process.env.PORT || 5000;
+tourRouter
+  .route("/distances/:latLng/unit/:unit")
+  .get(getDistances);
 
-const server = app.listen(port, () => {
-  // eslint-disable-next-line no-console
-  console.log(`listen at port: + ${port}`);
-});
+// everybody can call getAllTour route
+// admin and lead-guide are only user can create a new tour
+tourRouter
+  .route("/")
+  .get(getAllTours)
+  .post(protect, restrictTo("admin", "lead-guide"), createTour);
 
-/**
- *  handling unhandled Rejection error globally
- * @param {TypeError} err uncaught error object
- * @returns {void}
- *
- */
-const unhandledRejection = (err) => {
-  // eslint-disable-next-line no-console
-  console.log("unhandled Rejection Shuting down... ");
-  // eslint-disable-next-line no-console
-  console.log({ err });
-  server.close(() => {
-    process.exit(1);
-  });
-};
+// admin and lead-guide are only users can update tour or delete it
+// get single tour is also for everybody
 
-process.on("unhandledRejection", unhandledRejection);
+tourRouter
+  .route("/:id")
+  .get(getTour)
+  .patch(
+    protect,
+    restrictTo("admin", "lead-guide"),
+    uploadTourImages,
+    resizeTourImages,
+    updateTour
+  )
+  .delete(protect, restrictTo("admin", "lead-guide"), deleteTour);
 
-main();
+// tourRouter
+//   .route("/:tourId/reviews")
+//   .post(protect, restrictTo("user"), createReview);
+
+export default tourRouter;
 </code></pre>
         </article>
     </section>

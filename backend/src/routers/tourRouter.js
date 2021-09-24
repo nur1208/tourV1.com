@@ -19,6 +19,9 @@ import {
 } from "../controllers/tourController.js";
 import reviewRouter from "./reviewRouter.js";
 
+/**
+ * @file tourRouter.js contains all the routers of tour requests
+ */
 // this is the  middleware stack
 // const m = middleware
 // morgan m - json m - clg m - adding requestedAT m
@@ -38,6 +41,9 @@ const tourRouter = express.Router();
 
 tourRouter.use("/:tourId/reviews", reviewRouter);
 
+// route of getting top 5 best cheapest tours using two middleware:
+// 1-  aliasTopTours
+// 2 - getAllTours
 tourRouter.route("/top-5-cheap").get(aliasTopTours, getAllTours);
 
 tourRouter.route("/tour-stats").get(getTourStats);

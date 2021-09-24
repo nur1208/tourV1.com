@@ -86,6 +86,7 @@ export const getOne = (Model, popOptions) =>
     });
   });
 
+// Closures Function
 export const getAll = (Model) =>
   catchAsync(async (req, res, next) => {
     let filter = {};
