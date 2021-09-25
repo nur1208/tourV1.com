@@ -46,7 +46,11 @@ tourRouter.use("/:tourId/reviews", reviewRouter);
 // 2 - getAllTours
 tourRouter.route("/top-5-cheap").get(aliasTopTours, getAllTours);
 
+// route of getting tour statistics using one middleware:
+// 1 - getTourStats
 tourRouter.route("/tour-stats").get(getTourStats);
+
+
 tourRouter
   .route("/monthly-plan/:year")
   .get(

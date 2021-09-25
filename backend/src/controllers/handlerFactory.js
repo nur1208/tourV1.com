@@ -86,7 +86,16 @@ export const getOne = (Model, popOptions) =>
     });
   });
 
-// Closures Function
+/**
+ * - getAll function is Closure Function
+ * - this function for factory our code.
+ * - instead of writing getAllTour, getAllUser or getAllSomething code and then have lots of duplicate code
+ * - getAll solved that problem by writing one implementation code for getAllTour or getAllUser and just passing Model of Tour or User to it.
+ * @param {mongoose.Model} Model
+ * @returns {Function}
+ */
+
+// Closure Function
 export const getAll = (Model) =>
   catchAsync(async (req, res, next) => {
     let filter = {};

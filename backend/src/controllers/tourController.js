@@ -119,6 +119,17 @@ export const deleteTour = deleteOne(Tour);
 //   });
 // });
 
+/**
+ * middleware of getting tour statistics that group by difficulty fields:
+ *   - total number of tours
+ *  - total number of rating for the tours
+ *  - average number of Rating for the tours
+ *  - average number of price for the tours
+ *  - minimum number of price for the tours
+ *  - maximum number of price for the tours
+ * - and then sort them by average price
+ */
+
 export const getTourStats = catchAsync(async (req, res, next) => {
   const stats = await Tour.aggregate([
     { $match: { ratingsAverage: { $gte: 4.5 } } },
