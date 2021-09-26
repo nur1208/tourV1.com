@@ -50,7 +50,11 @@ tourRouter.route("/top-5-cheap").get(aliasTopTours, getAllTours);
 // 1 - getTourStats
 tourRouter.route("/tour-stats").get(getTourStats);
 
-
+// route of getting monthly plan for admin, lead-guid or lead
+// using three middleware: 
+// 1 - protect (the user need to be logged in)
+// 2 - restrictTo function that return middleware (to restrict specific users (admin, ...))
+// 3 - getMonthlyPlan middleware to get a monthly plan of specific year  
 tourRouter
   .route("/monthly-plan/:year")
   .get(

@@ -158,6 +158,10 @@ export const getTourStats = catchAsync(async (req, res, next) => {
   });
 });
 
+/**
+ * getMonthlyPlan is middleware for get monthly play for specific year
+ * - it will send  number of tours that will start for specific month and array of names of that tours
+ */
 export const getMonthlyPlan = catchAsync(
   async (req, res, next) => {
     const year = req.params.year * 1;
