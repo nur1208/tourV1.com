@@ -79,10 +79,10 @@ tourRouter.route("/top-5-cheap").get(aliasTopTours, getAllTours);
 tourRouter.route("/tour-stats").get(getTourStats);
 
 // route of getting monthly plan for admin, lead-guid or lead
-// using three middleware: 
+// using three middleware:
 // 1 - protect (the user need to be logged in)
 // 2 - restrictTo function that return middleware (to restrict specific users (admin, ...))
-// 3 - getMonthlyPlan middleware to get a monthly plan of specific year  
+// 3 - getMonthlyPlan middleware to get a monthly plan of specific year
 tourRouter
   .route("/monthly-plan/:year")
   .get(
@@ -91,10 +91,13 @@ tourRouter
     getMonthlyPlan
   );
 
+// route of getting tours of within lat Lng points (around the point that was giving to it) using one middleware:
+// 1 - getToursWithin
 tourRouter
   .route("/tours-within/:distance/center/:latLng/unit/:unit")
   .get(getToursWithIn);
 
+// route of getting distances of giving lat leg 
 tourRouter
   .route("/distances/:latLng/unit/:unit")
   .get(getDistances);
@@ -136,13 +139,13 @@ export default tourRouter;
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#addDataToRequest">addDataToRequest</a></li><li><a href="global.html#aliasTopTours">aliasTopTours</a></li><li><a href="global.html#allowAccess">allowAccess</a></li><li><a href="global.html#app">app</a></li><li><a href="global.html#compressionData">compressionData</a></li><li><a href="global.html#getAll">getAll</a></li><li><a href="global.html#getAllTours">getAllTours</a></li><li><a href="global.html#getMonthlyPlan">getMonthlyPlan</a></li><li><a href="global.html#getTourStats">getTourStats</a></li><li><a href="global.html#globalErrorHandler">globalErrorHandler</a></li><li><a href="global.html#handleCastErrorDB">handleCastErrorDB</a></li><li><a href="global.html#handleDuplicateFieldsDB">handleDuplicateFieldsDB</a></li><li><a href="global.html#handleJWTError">handleJWTError</a></li><li><a href="global.html#handleJWTExpired">handleJWTExpired</a></li><li><a href="global.html#handleJWTRecentlyCPError">handleJWTRecentlyCPError</a></li><li><a href="global.html#handleUnCaughtException">handleUnCaughtException</a></li><li><a href="global.html#handleValidationErrorDB">handleValidationErrorDB</a></li><li><a href="global.html#handleWrongURL">handleWrongURL</a></li><li><a href="global.html#httpSecurityHeaders">httpSecurityHeaders</a></li><li><a href="global.html#limiter">limiter</a></li><li><a href="global.html#main">main</a></li><li><a href="global.html#morganDev">morganDev</a></li><li><a href="global.html#noSQlInjection">noSQlInjection</a></li><li><a href="global.html#preventParameterPollution">preventParameterPollution</a></li><li><a href="global.html#protect">protect</a></li><li><a href="global.html#restrictTo">restrictTo</a></li><li><a href="global.html#sanitizationXss">sanitizationXss</a></li><li><a href="global.html#sendErrorDev">sendErrorDev</a></li><li><a href="global.html#staticFiles">staticFiles</a></li><li><a href="global.html#unhandledRejection">unhandledRejection</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#addDataToRequest">addDataToRequest</a></li><li><a href="global.html#aliasTopTours">aliasTopTours</a></li><li><a href="global.html#allowAccess">allowAccess</a></li><li><a href="global.html#app">app</a></li><li><a href="global.html#compressionData">compressionData</a></li><li><a href="global.html#getAll">getAll</a></li><li><a href="global.html#getAllTours">getAllTours</a></li><li><a href="global.html#getDistances">getDistances</a></li><li><a href="global.html#getMonthlyPlan">getMonthlyPlan</a></li><li><a href="global.html#getTourStats">getTourStats</a></li><li><a href="global.html#getToursWithIn">getToursWithIn</a></li><li><a href="global.html#globalErrorHandler">globalErrorHandler</a></li><li><a href="global.html#handleCastErrorDB">handleCastErrorDB</a></li><li><a href="global.html#handleDuplicateFieldsDB">handleDuplicateFieldsDB</a></li><li><a href="global.html#handleJWTError">handleJWTError</a></li><li><a href="global.html#handleJWTExpired">handleJWTExpired</a></li><li><a href="global.html#handleJWTRecentlyCPError">handleJWTRecentlyCPError</a></li><li><a href="global.html#handleUnCaughtException">handleUnCaughtException</a></li><li><a href="global.html#handleValidationErrorDB">handleValidationErrorDB</a></li><li><a href="global.html#handleWrongURL">handleWrongURL</a></li><li><a href="global.html#httpSecurityHeaders">httpSecurityHeaders</a></li><li><a href="global.html#limiter">limiter</a></li><li><a href="global.html#main">main</a></li><li><a href="global.html#morganDev">morganDev</a></li><li><a href="global.html#noSQlInjection">noSQlInjection</a></li><li><a href="global.html#preventParameterPollution">preventParameterPollution</a></li><li><a href="global.html#protect">protect</a></li><li><a href="global.html#restrictTo">restrictTo</a></li><li><a href="global.html#sanitizationXss">sanitizationXss</a></li><li><a href="global.html#sendErrorDev">sendErrorDev</a></li><li><a href="global.html#staticFiles">staticFiles</a></li><li><a href="global.html#unhandledRejection">unhandledRejection</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Sun Sep 26 2021 10:07:40 GMT+0800 (China Standard Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Mon Sep 27 2021 19:09:50 GMT+0800 (China Standard Time)
 </footer>
 
 <script> prettyPrint(); </script>

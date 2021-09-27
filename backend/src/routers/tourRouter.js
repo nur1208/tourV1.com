@@ -51,10 +51,10 @@ tourRouter.route("/top-5-cheap").get(aliasTopTours, getAllTours);
 tourRouter.route("/tour-stats").get(getTourStats);
 
 // route of getting monthly plan for admin, lead-guid or lead
-// using three middleware: 
+// using three middleware:
 // 1 - protect (the user need to be logged in)
 // 2 - restrictTo function that return middleware (to restrict specific users (admin, ...))
-// 3 - getMonthlyPlan middleware to get a monthly plan of specific year  
+// 3 - getMonthlyPlan middleware to get a monthly plan of specific year
 tourRouter
   .route("/monthly-plan/:year")
   .get(
@@ -63,10 +63,13 @@ tourRouter
     getMonthlyPlan
   );
 
+// route of getting tours of within lat Lng points (around the point that was giving to it) using one middleware:
+// 1 - getToursWithin
 tourRouter
   .route("/tours-within/:distance/center/:latLng/unit/:unit")
   .get(getToursWithIn);
 
+// route of getting distances of giving lat leg 
 tourRouter
   .route("/distances/:latLng/unit/:unit")
   .get(getDistances);

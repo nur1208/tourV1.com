@@ -204,6 +204,9 @@ export const getMonthlyPlan = catchAsync(
 );
 // "/tours-within/:distance/center/:latLng/unit/:unit",
 
+/**
+ * middleware for getting tours within giving lat and leg points using monogdb $geoWithin operator
+ */
 export const getToursWithIn = catchAsync(
   async (req, res, next) => {
     const { distance, latLng, unit } = req.params;
@@ -234,6 +237,9 @@ export const getToursWithIn = catchAsync(
   }
 );
 
+/**
+ * getDistances is middleware for getting distances of giving points
+ */
 export const getDistances = catchAsync(async (req, res, next) => {
   const { latLng, unit } = req.params;
   const [lat, lng] = latLng.split(",");
