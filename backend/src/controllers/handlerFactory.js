@@ -51,6 +51,16 @@ export const updateOne = (Model) =>
     });
   });
 
+/**
+ * - createOne function is Closure Function
+ * - this function for factory our code.
+ * - instead of writing createTour, createUser or createSomething code and then have lots of duplicate code
+ * - createOne solved that problem by writing one implementation code for createTour or createUser and just passing Model of Tour or User to it.
+ *
+ * @param {mongoose.Model} Model
+ * @returns {Function}
+ */
+
 export const createOne = (Model) =>
   catchAsync(async (req, res, next) => {
     const newDoc = await Model.create(req.body);
@@ -62,6 +72,17 @@ export const createOne = (Model) =>
       },
     });
   });
+
+/**
+ * - getOne function is Closure Function
+ * - this function for factory our code.
+ * - instead of writing getTour, getUser or getSomething code and then have lots of duplicate code
+ * - getOne solved that problem by writing one implementation code for getTour or getUser and by passing Model of Tour or User and  populate options to it.
+ *
+ * @param {mongoose.Model} Model
+ * @param {Object} popOptions - it is optional
+ * @returns {Function}
+ */
 
 export const getOne = (Model, popOptions) =>
   catchAsync(async (req, res, next) => {

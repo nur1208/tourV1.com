@@ -33,8 +33,12 @@ export const upload = multer({
   fileFilter: multerFilter,
 });
 
-// this will add files to the request object and also upload.array
+// this will add files to the request object
 // but upload file will add file to it
+/**
+ * uploadTourImages middleware is for letting users upload images for a tour using multer
+ * - this middleware will add files to the req object. 
+ */
 export const uploadTourImages = upload.fields([
   { name: "imageCover", maxCount: 1 },
   { name: "images", maxCount: 3 },
@@ -93,13 +97,22 @@ export const aliasTopTours = (req, res, next) => {
 };
 
 /**
- * getAllTours middleware which will call getAll factory function
- * and passing Tour to it, to it let know "get document for what model"
+ * getAllTours middleware which will call getAll Closure function
+ * and passing Tour to it, to let it  know "get all documents for what model"
  */
 export const getAllTours = getAll(Tour);
 
-// this is will return a function a
+/**
+ * getTour middleware which will call getOne Closure function
+ * and passing Tour model and optional populate options to it, to let it  know "get document for what model"
+ */
 export const getTour = getOne(Tour, { path: `reviews` });
+
+
+/**
+ * createTour middleware which will call createOne Closure function
+ * and passing Tour to it, to let it  know "create document for what model"
+ */
 export const createTour = createOne(Tour);
 export const updateTour = updateOne(Tour);
 export const deleteTour = deleteOne(Tour);

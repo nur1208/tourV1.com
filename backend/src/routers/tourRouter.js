@@ -83,7 +83,6 @@ tourRouter
 
 // admin and lead-guide are only users can update tour or delete it
 // get single tour is also for everybody
-
 tourRouter
   .route("/:id")
   .get(getTour)
