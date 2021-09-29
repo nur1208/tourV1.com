@@ -2,6 +2,16 @@ import APIFeatures from "../../utils/apiFeatures.js";
 import AppError from "../../utils/appError.js";
 import catchAsync from "../../utils/catchAsync.js";
 
+/**
+ * - deleteOne function is Closure Function
+ * - this function for factory our code.
+ * - instead of writing deleteTour, deleteUser or deleteSomething code and then have lots of duplicate code
+ * - deleteOne solved that problem by writing one implementation code for deleteTour or deleteUser and just passing Model of Tour or User to it.
+ *
+ * @param {mongoose.Model} Model
+ * @returns {Function}
+ */
+
 export const deleteOne = (Model) =>
   catchAsync(async (req, res, next) => {
     // console.log({ Model });
@@ -22,6 +32,16 @@ export const deleteOne = (Model) =>
       data: null,
     });
   });
+
+/**
+ * - updateOne function is Closure Function
+ * - this function for factory our code.
+ * - instead of writing updateTour, updateUser or updateSomething code and then have lots of duplicate code
+ * - updateOne solved that problem by writing one implementation code for updateTour or updateUser and just passing Model of Tour or User to it.
+ *
+ * @param {mongoose.Model} Model
+ * @returns {Function}
+ */
 
 export const updateOne = (Model) =>
   catchAsync(async (req, res, next) => {

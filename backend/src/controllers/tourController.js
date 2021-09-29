@@ -37,13 +37,17 @@ export const upload = multer({
 // but upload file will add file to it
 /**
  * uploadTourImages middleware is for letting users upload images for a tour using multer
- * - this middleware will add files to the req object. 
+ * - this middleware will add files to the req object.
  */
 export const uploadTourImages = upload.fields([
   { name: "imageCover", maxCount: 1 },
   { name: "images", maxCount: 3 },
 ]);
 
+/**
+ * middleware of resizing images in saving them
+ * - using sharp npm package
+ */
 export const resizeTourImages = catchAsync(
   async (req, res, next) => {
     if (!req.files.imageCover || !req.files.images) return next();
@@ -108,13 +112,21 @@ export const getAllTours = getAll(Tour);
  */
 export const getTour = getOne(Tour, { path: `reviews` });
 
-
 /**
  * createTour middleware which will call createOne Closure function
  * and passing Tour to it, to let it  know "create document for what model"
  */
 export const createTour = createOne(Tour);
+/**
+ * updateTour middleware which will call updateOne Closure function
+ * and passing Tour to it, to let it  know "update document for what model"
+ */
 export const updateTour = updateOne(Tour);
+/**
+ * deleteTour middleware which will call deleteOne Closure function
+ * and passing Tour to it, to let it  know "delete document for what model"
+ */
+
 export const deleteTour = deleteOne(Tour);
 
 // export const deleteTour = catchAsync(async (req, res, next) => {
