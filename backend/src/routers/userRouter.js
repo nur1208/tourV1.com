@@ -22,10 +22,17 @@ import {
 } from "../controllers/userController.js";
 
 // multer is  middleware for multi-part form data
+/**
+ * @file userRouter.js contains all the routers of tour requests
+ */
+
 
 const router = express.Router();
 
+// route for login users using one middleware:
+// 1 - login
 router.post("/login", login);
+
 router.post("/signup", signUp);
 
 router.post("/forgetPassword", forgetPassword);

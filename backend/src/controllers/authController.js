@@ -92,6 +92,15 @@ export const signUp = catchAsync(async (req, res) => {
   // });
 });
 
+/**
+ * login middleware is for login user to our server
+ * - the user must send email and password in req.body
+ * - checking if the email exist in our database
+ * - if the email exist check if the password correct using bcrypt.compare function
+ * - if all checking passed
+ * - set jwt token in a user's browser cookie
+ * - send jwt and a user info to the cline
+ */
 export const login = catchAsync(async (req, res, next) => {
   const { email, password } = req.body;
   // console.log("here");

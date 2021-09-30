@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: server.js</title>
+    <title>JSDoc: Source: routers/userRouter.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: server.js</h1>
+    <h1 class="page-title">Source: routers/userRouter.js</h1>
 
     
 
@@ -26,80 +26,73 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>/**
- * @file this file for everything relate to server.
- */
-// this file for everything relate to server.
-import mongoose from "mongoose";
-import app from "./app.js";
+            <pre class="prettyprint source linenums"><code>import express from "express";
+import {
+  resetPassword,
+  forgetPassword,
+  login,
+  signUp,
+  updatePassword,
+  protect,
+  restrictTo,
+} from "../controllers/authController.js";
+import {
+  createUser,
+  deleteMe,
+  deleteUser,
+  getAllUsers,
+  getMe,
+  getUser,
+  resizeUserPhoto,
+  updateMe,
+  updateUser,
+  uploadUserPhoto,
+} from "../controllers/userController.js";
 
+// multer is  middleware for multi-part form data
 /**
- *  handling uncaught Exception error globally
- * @param {TypeError} err uncaught error object
- * @returns {void}
- *
+ * @file userRouter.js contains all the routers of tour requests
  */
-const handleUnCaughtException = (err) => {
-  // eslint-disable-next-line no-console
-  console.log("unhandled Exception Shuting down... ");
-  // eslint-disable-next-line no-console
-  console.log({ err: err.message });
-  process.exit(1);
-};
 
-process.on("uncaughtException", handleUnCaughtException);
 
-/**
- * main function to use 'await' keyword inside server.js
- * @returns {void}
- */
-const main = async () => {
-  // const DB = process.env.DATABASE.replace(
-  //   "&lt;PASSWORD>",
-  //   process.env.DATABASE_PASSWORD
-  // );
+const router = express.Router();
 
-  const DB = process.env.DATABASE_LOCAL;
+// route for login users using one middleware:
+// 1 - login
+router.post("/login", login);
 
-  await mongoose.connect(DB, {
-    useNewUrlParser: true,
-    useCreateIndex: true,
-    useFindAndModify: false,
-  });
+router.post("/signup", signUp);
 
-  // eslint-disable-next-line no-console
-  console.log("DB connection successful");
+router.post("/forgetPassword", forgetPassword);
+router.patch("/resetPassword/:token", resetPassword);
 
-  // eslint-disable-next-line no-console
-  console.log({ env: process.env.NODE_ENV });
-};
+// router is like mini app so we can use "use" function with it.
+// and the code in here run line by line.
+router.use(protect);
 
-const port = process.env.PORT || 5000;
+// all the route in here have the protect middleware in their middleware stick
+router.patch("/updateMyPassword", updatePassword);
 
-const server = app.listen(port, () => {
-  // eslint-disable-next-line no-console
-  console.log(`listen at port: + ${port}`);
-});
+router.patch(
+  "/updateMe",
+  uploadUserPhoto,
+  resizeUserPhoto,
+  updateMe
+);
+router.delete("/deleteMe", deleteMe);
+router.get("/me", getMe, getUser);
 
-/**
- *  handling unhandled Rejection error globally
- * @param {TypeError} err uncaught error object
- * @returns {void}
- *
- */
-const unhandledRejection = (err) => {
-  // eslint-disable-next-line no-console
-  console.log("unhandled Rejection Shuting down... ");
-  // eslint-disable-next-line no-console
-  console.log({ err });
-  server.close(() => {
-    process.exit(1);
-  });
-};
+// all the routers after this route for admin only
+router.use(restrictTo("admin"));
 
-process.on("unhandledRejection", unhandledRejection);
+router.route("/").get(getAllUsers).post(createUser);
+router
+  .route("/:id")
+  .get(getUser)
+  .patch(updateUser)
+  .delete(deleteUser);
 
-main();
+export default router;
 </code></pre>
         </article>
     </section>
