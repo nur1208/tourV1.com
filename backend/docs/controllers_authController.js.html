@@ -74,25 +74,17 @@ const createSendToken = (user, statusCode, res) => {
   });
 };
 
+/**
+ * signUp middleware is very simple, it for registering users to our server, a user should pass name, email, password, passwordConfirm
+ */
 export const signUp = catchAsync(async (req, res) => {
-  const {
-    name,
-    email,
-    password,
-    passwordConfirm,
-    photo,
-    passwordChangedAt,
-    role,
-  } = req.body;
+  const { name, email, password, passwordConfirm } = req.body;
 
   const newUser = await User.create({
     name,
     email,
     password,
     passwordConfirm,
-    photo,
-    passwordChangedAt,
-    role,
   });
 
   // const url = `${req.protocol}://${req.get("host")}/me`;
@@ -250,6 +242,12 @@ export const restrictTo =
     next();
   };
 
+/**
+ * forgetPassword middleware is for sending reset token to the user using the following steps:
+ * - get user based on Posted email
+ * - generate the random token
+ * - send it to user's email
+ */ 
 export const forgetPassword = catchAsync(
   async (req, res, next) => {
     // 1) get user based on Posted email
@@ -369,13 +367,13 @@ export const updatePassword = async (req, res, next) => {
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#addDataToRequest">addDataToRequest</a></li><li><a href="global.html#aliasTopTours">aliasTopTours</a></li><li><a href="global.html#allowAccess">allowAccess</a></li><li><a href="global.html#app">app</a></li><li><a href="global.html#compressionData">compressionData</a></li><li><a href="global.html#createOne">createOne</a></li><li><a href="global.html#createTour">createTour</a></li><li><a href="global.html#deleteOne">deleteOne</a></li><li><a href="global.html#deleteTour">deleteTour</a></li><li><a href="global.html#getAll">getAll</a></li><li><a href="global.html#getAllTours">getAllTours</a></li><li><a href="global.html#getDistances">getDistances</a></li><li><a href="global.html#getMonthlyPlan">getMonthlyPlan</a></li><li><a href="global.html#getOne">getOne</a></li><li><a href="global.html#getTour">getTour</a></li><li><a href="global.html#getTourStats">getTourStats</a></li><li><a href="global.html#getToursWithIn">getToursWithIn</a></li><li><a href="global.html#globalErrorHandler">globalErrorHandler</a></li><li><a href="global.html#handleCastErrorDB">handleCastErrorDB</a></li><li><a href="global.html#handleDuplicateFieldsDB">handleDuplicateFieldsDB</a></li><li><a href="global.html#handleJWTError">handleJWTError</a></li><li><a href="global.html#handleJWTExpired">handleJWTExpired</a></li><li><a href="global.html#handleJWTRecentlyCPError">handleJWTRecentlyCPError</a></li><li><a href="global.html#handleUnCaughtException">handleUnCaughtException</a></li><li><a href="global.html#handleValidationErrorDB">handleValidationErrorDB</a></li><li><a href="global.html#handleWrongURL">handleWrongURL</a></li><li><a href="global.html#httpSecurityHeaders">httpSecurityHeaders</a></li><li><a href="global.html#limiter">limiter</a></li><li><a href="global.html#login">login</a></li><li><a href="global.html#main">main</a></li><li><a href="global.html#morganDev">morganDev</a></li><li><a href="global.html#noSQlInjection">noSQlInjection</a></li><li><a href="global.html#preventParameterPollution">preventParameterPollution</a></li><li><a href="global.html#protect">protect</a></li><li><a href="global.html#resizeTourImages">resizeTourImages</a></li><li><a href="global.html#restrictTo">restrictTo</a></li><li><a href="global.html#sanitizationXss">sanitizationXss</a></li><li><a href="global.html#sendErrorDev">sendErrorDev</a></li><li><a href="global.html#staticFiles">staticFiles</a></li><li><a href="global.html#unhandledRejection">unhandledRejection</a></li><li><a href="global.html#updateOne">updateOne</a></li><li><a href="global.html#updateTour">updateTour</a></li><li><a href="global.html#uploadTourImages">uploadTourImages</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#addDataToRequest">addDataToRequest</a></li><li><a href="global.html#aliasTopTours">aliasTopTours</a></li><li><a href="global.html#allowAccess">allowAccess</a></li><li><a href="global.html#app">app</a></li><li><a href="global.html#compressionData">compressionData</a></li><li><a href="global.html#createOne">createOne</a></li><li><a href="global.html#createTour">createTour</a></li><li><a href="global.html#deleteOne">deleteOne</a></li><li><a href="global.html#deleteTour">deleteTour</a></li><li><a href="global.html#forgetPassword">forgetPassword</a></li><li><a href="global.html#getAll">getAll</a></li><li><a href="global.html#getAllTours">getAllTours</a></li><li><a href="global.html#getDistances">getDistances</a></li><li><a href="global.html#getMonthlyPlan">getMonthlyPlan</a></li><li><a href="global.html#getOne">getOne</a></li><li><a href="global.html#getTour">getTour</a></li><li><a href="global.html#getTourStats">getTourStats</a></li><li><a href="global.html#getToursWithIn">getToursWithIn</a></li><li><a href="global.html#globalErrorHandler">globalErrorHandler</a></li><li><a href="global.html#handleCastErrorDB">handleCastErrorDB</a></li><li><a href="global.html#handleDuplicateFieldsDB">handleDuplicateFieldsDB</a></li><li><a href="global.html#handleJWTError">handleJWTError</a></li><li><a href="global.html#handleJWTExpired">handleJWTExpired</a></li><li><a href="global.html#handleJWTRecentlyCPError">handleJWTRecentlyCPError</a></li><li><a href="global.html#handleUnCaughtException">handleUnCaughtException</a></li><li><a href="global.html#handleValidationErrorDB">handleValidationErrorDB</a></li><li><a href="global.html#handleWrongURL">handleWrongURL</a></li><li><a href="global.html#httpSecurityHeaders">httpSecurityHeaders</a></li><li><a href="global.html#limiter">limiter</a></li><li><a href="global.html#login">login</a></li><li><a href="global.html#main">main</a></li><li><a href="global.html#morganDev">morganDev</a></li><li><a href="global.html#noSQlInjection">noSQlInjection</a></li><li><a href="global.html#preventParameterPollution">preventParameterPollution</a></li><li><a href="global.html#protect">protect</a></li><li><a href="global.html#resizeTourImages">resizeTourImages</a></li><li><a href="global.html#restrictTo">restrictTo</a></li><li><a href="global.html#sanitizationXss">sanitizationXss</a></li><li><a href="global.html#sendErrorDev">sendErrorDev</a></li><li><a href="global.html#signUp">signUp</a></li><li><a href="global.html#staticFiles">staticFiles</a></li><li><a href="global.html#unhandledRejection">unhandledRejection</a></li><li><a href="global.html#updateOne">updateOne</a></li><li><a href="global.html#updateTour">updateTour</a></li><li><a href="global.html#uploadTourImages">uploadTourImages</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Thu Sep 30 2021 20:40:35 GMT+0800 (China Standard Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Sat Oct 02 2021 18:55:15 GMT+0800 (China Standard Time)
 </footer>
 
 <script> prettyPrint(); </script>

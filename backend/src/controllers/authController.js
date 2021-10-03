@@ -46,25 +46,17 @@ const createSendToken = (user, statusCode, res) => {
   });
 };
 
+/**
+ * signUp middleware is very simple, it for registering users to our server, a user should pass name, email, password, passwordConfirm
+ */
 export const signUp = catchAsync(async (req, res) => {
-  const {
-    name,
-    email,
-    password,
-    passwordConfirm,
-    photo,
-    passwordChangedAt,
-    role,
-  } = req.body;
+  const { name, email, password, passwordConfirm } = req.body;
 
   const newUser = await User.create({
     name,
     email,
     password,
     passwordConfirm,
-    photo,
-    passwordChangedAt,
-    role,
   });
 
   // const url = `${req.protocol}://${req.get("host")}/me`;
@@ -222,6 +214,12 @@ export const restrictTo =
     next();
   };
 
+/**
+ * forgetPassword middleware is for sending reset token to the user using the following steps:
+ * - get user based on Posted email
+ * - generate the random token
+ * - send it to user's email
+ */
 export const forgetPassword = catchAsync(
   async (req, res, next) => {
     // 1) get user based on Posted email
@@ -272,6 +270,13 @@ export const forgetPassword = catchAsync(
   }
 );
 
+/**
+ * resetPassword middleware for validating reset token and reset a user password if the token is valid using the following steps:
+ * -  get user base on the token.
+ * - if token has not expired and there is a user so in that case, set the new password
+ * - update the changedPasswordAt for the current user
+ * - log the user in, send the JSON Web Token to the client
+ */
 export const resetPassword = async (req, res, next) => {
   // 1) get user base on the token.
 
@@ -296,9 +301,10 @@ export const resetPassword = async (req, res, next) => {
   user.passwordConfirm = req.body.passwordConfirm;
   user.passwordResetToken = undefined;
   user.passwordResetExpires = undefined;
-  user.save();
-
   // 3) update the changedPasswordAt for the current user
+  // we did using per save mongoose middleware
+  await user.save();
+
   //4) log the user in, send the JSON Web Token to the client
   createSendToken(user, 201, res);
 };

@@ -684,6 +684,73 @@ and passing Tour to it, to let it  know &quot;delete document for what model&quo
 
         
             
+<h4 class="name" id="forgetPassword"><span class="type-signature">(constant) </span>forgetPassword<span class="type-signature"></span></h4>
+
+
+
+
+<div class="description">
+    <p>forgetPassword middleware is for sending reset token to the user using the following steps:</p>
+<ul>
+<li>get user based on Posted email</li>
+<li>generate the random token</li>
+<li>send it to user's email</li>
+</ul>
+</div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="controllers_authController.js.html">controllers/authController.js</a>, <a href="controllers_authController.js.html#line223">line 223</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
 <h4 class="name" id="getAll"><span class="type-signature">(constant) </span>getAll<span class="type-signature"></span></h4>
 
 
@@ -1384,7 +1451,7 @@ message - when the user reach the limit he/her will see the message</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="controllers_authController.js.html">controllers/authController.js</a>, <a href="controllers_authController.js.html#line104">line 104</a>
+        <a href="controllers_authController.js.html">controllers/authController.js</a>, <a href="controllers_authController.js.html#line96">line 96</a>
     </li></ul></dd>
     
 
@@ -1641,7 +1708,7 @@ message - when the user reach the limit he/her will see the message</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="controllers_authController.js.html">controllers/authController.js</a>, <a href="controllers_authController.js.html#line150">line 150</a>
+        <a href="controllers_authController.js.html">controllers/authController.js</a>, <a href="controllers_authController.js.html#line142">line 142</a>
     </li></ul></dd>
     
 
@@ -1772,7 +1839,7 @@ message - when the user reach the limit he/her will see the message</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="controllers_authController.js.html">controllers/authController.js</a>, <a href="controllers_authController.js.html#line210">line 210</a>
+        <a href="controllers_authController.js.html">controllers/authController.js</a>, <a href="controllers_authController.js.html#line202">line 202</a>
     </li></ul></dd>
     
 
@@ -1835,6 +1902,68 @@ message - when the user reach the limit he/her will see the message</p>
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
         <a href="app.js.html">app.js</a>, <a href="app.js.html#line102">line 102</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="signUp"><span class="type-signature">(constant) </span>signUp<span class="type-signature"></span></h4>
+
+
+
+
+<div class="description">
+    <p>signUp middleware is very simple, it for registering users to our server, a user should pass name, email, password, passwordConfirm</p>
+</div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="controllers_authController.js.html">controllers/authController.js</a>, <a href="controllers_authController.js.html#line52">line 52</a>
     </li></ul></dd>
     
 
@@ -3352,13 +3481,13 @@ and passing Tour to it, to let it  know &quot;update document for what model&quo
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#addDataToRequest">addDataToRequest</a></li><li><a href="global.html#aliasTopTours">aliasTopTours</a></li><li><a href="global.html#allowAccess">allowAccess</a></li><li><a href="global.html#app">app</a></li><li><a href="global.html#compressionData">compressionData</a></li><li><a href="global.html#createOne">createOne</a></li><li><a href="global.html#createTour">createTour</a></li><li><a href="global.html#deleteOne">deleteOne</a></li><li><a href="global.html#deleteTour">deleteTour</a></li><li><a href="global.html#getAll">getAll</a></li><li><a href="global.html#getAllTours">getAllTours</a></li><li><a href="global.html#getDistances">getDistances</a></li><li><a href="global.html#getMonthlyPlan">getMonthlyPlan</a></li><li><a href="global.html#getOne">getOne</a></li><li><a href="global.html#getTour">getTour</a></li><li><a href="global.html#getTourStats">getTourStats</a></li><li><a href="global.html#getToursWithIn">getToursWithIn</a></li><li><a href="global.html#globalErrorHandler">globalErrorHandler</a></li><li><a href="global.html#handleCastErrorDB">handleCastErrorDB</a></li><li><a href="global.html#handleDuplicateFieldsDB">handleDuplicateFieldsDB</a></li><li><a href="global.html#handleJWTError">handleJWTError</a></li><li><a href="global.html#handleJWTExpired">handleJWTExpired</a></li><li><a href="global.html#handleJWTRecentlyCPError">handleJWTRecentlyCPError</a></li><li><a href="global.html#handleUnCaughtException">handleUnCaughtException</a></li><li><a href="global.html#handleValidationErrorDB">handleValidationErrorDB</a></li><li><a href="global.html#handleWrongURL">handleWrongURL</a></li><li><a href="global.html#httpSecurityHeaders">httpSecurityHeaders</a></li><li><a href="global.html#limiter">limiter</a></li><li><a href="global.html#login">login</a></li><li><a href="global.html#main">main</a></li><li><a href="global.html#morganDev">morganDev</a></li><li><a href="global.html#noSQlInjection">noSQlInjection</a></li><li><a href="global.html#preventParameterPollution">preventParameterPollution</a></li><li><a href="global.html#protect">protect</a></li><li><a href="global.html#resizeTourImages">resizeTourImages</a></li><li><a href="global.html#restrictTo">restrictTo</a></li><li><a href="global.html#sanitizationXss">sanitizationXss</a></li><li><a href="global.html#sendErrorDev">sendErrorDev</a></li><li><a href="global.html#staticFiles">staticFiles</a></li><li><a href="global.html#unhandledRejection">unhandledRejection</a></li><li><a href="global.html#updateOne">updateOne</a></li><li><a href="global.html#updateTour">updateTour</a></li><li><a href="global.html#uploadTourImages">uploadTourImages</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#addDataToRequest">addDataToRequest</a></li><li><a href="global.html#aliasTopTours">aliasTopTours</a></li><li><a href="global.html#allowAccess">allowAccess</a></li><li><a href="global.html#app">app</a></li><li><a href="global.html#compressionData">compressionData</a></li><li><a href="global.html#createOne">createOne</a></li><li><a href="global.html#createTour">createTour</a></li><li><a href="global.html#deleteOne">deleteOne</a></li><li><a href="global.html#deleteTour">deleteTour</a></li><li><a href="global.html#forgetPassword">forgetPassword</a></li><li><a href="global.html#getAll">getAll</a></li><li><a href="global.html#getAllTours">getAllTours</a></li><li><a href="global.html#getDistances">getDistances</a></li><li><a href="global.html#getMonthlyPlan">getMonthlyPlan</a></li><li><a href="global.html#getOne">getOne</a></li><li><a href="global.html#getTour">getTour</a></li><li><a href="global.html#getTourStats">getTourStats</a></li><li><a href="global.html#getToursWithIn">getToursWithIn</a></li><li><a href="global.html#globalErrorHandler">globalErrorHandler</a></li><li><a href="global.html#handleCastErrorDB">handleCastErrorDB</a></li><li><a href="global.html#handleDuplicateFieldsDB">handleDuplicateFieldsDB</a></li><li><a href="global.html#handleJWTError">handleJWTError</a></li><li><a href="global.html#handleJWTExpired">handleJWTExpired</a></li><li><a href="global.html#handleJWTRecentlyCPError">handleJWTRecentlyCPError</a></li><li><a href="global.html#handleUnCaughtException">handleUnCaughtException</a></li><li><a href="global.html#handleValidationErrorDB">handleValidationErrorDB</a></li><li><a href="global.html#handleWrongURL">handleWrongURL</a></li><li><a href="global.html#httpSecurityHeaders">httpSecurityHeaders</a></li><li><a href="global.html#limiter">limiter</a></li><li><a href="global.html#login">login</a></li><li><a href="global.html#main">main</a></li><li><a href="global.html#morganDev">morganDev</a></li><li><a href="global.html#noSQlInjection">noSQlInjection</a></li><li><a href="global.html#preventParameterPollution">preventParameterPollution</a></li><li><a href="global.html#protect">protect</a></li><li><a href="global.html#resizeTourImages">resizeTourImages</a></li><li><a href="global.html#restrictTo">restrictTo</a></li><li><a href="global.html#sanitizationXss">sanitizationXss</a></li><li><a href="global.html#sendErrorDev">sendErrorDev</a></li><li><a href="global.html#signUp">signUp</a></li><li><a href="global.html#staticFiles">staticFiles</a></li><li><a href="global.html#unhandledRejection">unhandledRejection</a></li><li><a href="global.html#updateOne">updateOne</a></li><li><a href="global.html#updateTour">updateTour</a></li><li><a href="global.html#uploadTourImages">uploadTourImages</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Thu Sep 30 2021 20:40:36 GMT+0800 (China Standard Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Sat Oct 02 2021 18:55:15 GMT+0800 (China Standard Time)
 </footer>
 
 <script> prettyPrint(); </script>

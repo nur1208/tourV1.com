@@ -26,16 +26,22 @@ import {
  * @file userRouter.js contains all the routers of tour requests
  */
 
-
 const router = express.Router();
 
-// route for login users using one middleware:
+// route for login users in our server using one middleware:
 // 1 - login
 router.post("/login", login);
 
+// route for registering users to our server using one middleware:
+// 1- signUp
 router.post("/signup", signUp);
 
+// if the user forget his/her password, he/she can reset his/her password,
+//this route for sending the token to hir/her email using one middleware:
+// forgetPassword
 router.post("/forgetPassword", forgetPassword);
+//this route for validating reset token and reset a user password if the token valid using one middleware:
+// 1- resetPassword
 router.patch("/resetPassword/:token", resetPassword);
 
 // router is like mini app so we can use "use" function with it.
@@ -43,6 +49,7 @@ router.patch("/resetPassword/:token", resetPassword);
 router.use(protect);
 
 // all the route in here have the protect middleware in their middleware stick
+//
 router.patch("/updateMyPassword", updatePassword);
 
 router.patch(
