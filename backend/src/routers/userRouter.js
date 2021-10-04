@@ -49,7 +49,7 @@ router.patch("/resetPassword/:token", resetPassword);
 router.use(protect);
 
 // all the route in here have the protect middleware in their middleware stick
-//
+// route for updating a password for a user that logged in
 router.patch("/updateMyPassword", updatePassword);
 
 router.patch(

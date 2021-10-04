@@ -309,6 +309,14 @@ export const resetPassword = async (req, res, next) => {
   createSendToken(user, 201, res);
 };
 
+/**
+ * updatePassword is middleware for letting logged in users update their password
+ * using the following steps:
+ *  - get the user from the collection
+ *  - check if posted current password is correct
+ *  - if all conditions passed update password
+ *  - "re login" the user
+ */
 export const updatePassword = async (req, res, next) => {
   //  1 ) get the user from the collection
   const { password, passwordConfirm } = req.body;
@@ -324,6 +332,7 @@ export const updatePassword = async (req, res, next) => {
   if (!password) {
     return next(new AppError("password is required", 400));
   }
+
 
   if (await user.correctPassword(password, user.password)) {
     return next(new AppError("incorrect password", 401));
